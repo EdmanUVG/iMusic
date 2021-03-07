@@ -1,0 +1,33 @@
+.sidebar {
+  background-color: #0F141D;
+  height: calc(100vh - 100px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.sidebar a {
+  color: #747981;
+  text-decoration: none;
+  padding-left: 15px;
+  margin-top: 50px;
+}
+
+.sidebar a:hover {
+  color: white;
+}
+
+.sidebar p {
+  color: #747981;
+  padding-left: 15px;
+  margin-top: 50px;
+}
+
+.sidebar .fas, .sidebar .far {
+  padding-right: 10px;
+}
+/*# sourceMappingURL=sidebar.css.map */

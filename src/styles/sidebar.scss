@@ -1,0 +1,30 @@
+@import "./variables.scss";
+
+
+.sidebar {
+    background-color: $primaryBackground;
+    height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+
+    a {
+        color: $primaryTextColor;
+        text-decoration: none;
+        padding-left: 15px;
+        margin-top: 50px;
+
+        &:hover {
+            color: white;
+        }
+    }
+
+    p {
+        color: $primaryTextColor;
+        padding-left: 15px;
+        margin-top: 50px;
+    }
+
+    .fas, .far {
+        padding-right: 10px;
+    }
+ }

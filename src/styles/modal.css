@@ -1,0 +1,166 @@
+.modal-dialog {
+  max-width: 480px !important;
+  max-height: 700px;
+}
+
+.modal-dialog .modal-content {
+  background: #1C1E21;
+}
+
+.modal-dialog .modal-content .title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 25px;
+}
+
+.modal-dialog .modal-content .title img {
+  border-radius: 20%;
+  margin-left: 10px;
+}
+
+.modal-dialog .modal-content .title h4 {
+  padding-left: 10px;
+  margin: 0;
+  color: white;
+}
+
+.modal-dialog .modal-content .login-to-continue {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 35px;
+}
+
+.modal-dialog .modal-content .login-to-continue p {
+  font-size: 25px;
+  font-weight: bold;
+  color: white;
+}
+
+.modal-dialog .modal-content form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 25px;
+}
+
+.modal-dialog .modal-content form input[type=text], .modal-dialog .modal-content form input[type=password] {
+  width: 320px;
+  height: 40px;
+  color: white;
+  font-size: 14px;
+  border-radius: 4px;
+  background-color: #1C1E21;
+  border: 1px solid #616264;
+  padding-left: 10px;
+}
+
+.modal-dialog .modal-content form input[type=text]:focus, .modal-dialog .modal-content form input[type=password]:focus {
+  border: 1px solid #323C76;
+  outline: #323C76;
+}
+
+.modal-dialog .modal-content form input[type=submit] {
+  background-color: white;
+  width: 320px;
+  height: 40px;
+  border-radius: 30px;
+}
+
+.modal-dialog .modal-content .connect-with {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 25px;
+}
+
+.modal-dialog .modal-content .connect-with p {
+  color: #737476;
+}
+
+.modal-dialog .modal-content .connect-with .fab {
+  color: #E3E4E4;
+  font-size: 27px;
+  margin: 25px;
+}
+
+.modal-dialog .modal-content .register-title p {
+  padding-top: 50px;
+  padding-left: 85px;
+  color: white;
+}
+
+#playlistModal .modal-dialog {
+  max-width: 700px !important;
+  max-height: 700px;
+}
+
+#playlistModal .modal-dialog form input[type=submit] {
+  margin-top: 30px;
+  margin-bottom: 70px;
+}
+
+#premiumModal .modal-dialog {
+  max-width: 700px !important;
+  max-height: 700px;
+}
+
+#premiumModal .modal-dialog form input[type=submit] {
+  margin-top: 30px;
+  margin-bottom: 70px;
+}
+
+#artistaModal .modal-dialog {
+  max-width: 700px !important;
+  max-height: 700px;
+}
+
+#artistaModal .modal-dialog input[type=submit] {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: auto;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: white;
+  width: 320px;
+  height: 40px;
+  border-radius: 30px;
+  margin-top: 30px;
+  margin-bottom: 70px;
+}
+/*# sourceMappingURL=modal.css.map */

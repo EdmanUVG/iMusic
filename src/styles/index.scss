@@ -1,0 +1,148 @@
+@import "./variables.scss";
+@import "./modal.scss";
+@import "./sidebar.scss";
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+body {
+    font-family: "Roboto", sans-serif;
+    background-color: #2C2C31;
+  }
+
+.container-fluid {
+    height: 100vh;
+
+    .main {
+        background-color: $primaryBackground;
+        height: calc(100vh - 100px);
+
+        form {
+            margin-top: 15px;
+        
+            input[type=text] {
+                width: 250px;
+                height: 35px;
+                color: white;
+                font-size: 14px;
+                border-radius: 4px;
+                background-color: $primaryBackground;
+                border: 1px solid $primaryTextColor;
+                border-right: none;
+                padding-right: 0px;
+                margin-right: 0px;
+                padding-left: 10px;
+                border-radius: 20px 0px 0px 20px;
+        
+                &:focus {
+                    border: 1px solid #323C76;
+                    outline: #323C76;
+                }
+            }
+        
+            button[type=submit] {
+                background-color: $primaryBackground;
+                width: 35px;
+                height: 35px;
+                color: $primaryTextColor;
+                margin-left: -10px;
+                padding-left: -10px;
+                border: 1px solid $primaryTextColor;
+                border-left: none;
+                border-radius: 0px 20px 20px 0px;
+            }
+        } 
+
+        .premium-button {
+            display: flex;
+            flex-direction: row-reverse;
+            button {
+                height: 35px;
+                margin-top: 15px;
+                border-radius: 7px;
+                width: 120px;
+                color: white;
+                font-size: 16px;
+                outline: none;
+                border: none;
+                background-image: linear-gradient(to right, red , yellow);
+            }
+
+            .far {
+                color: white;
+                font-size: 20px;
+                margin-top: 25px;
+                margin-left: 50px;
+                margin-right: 50px;
+                cursor: pointer;
+            }
+        }
+
+        .add-section {
+            margin-top: 25px;
+            a {
+                color: $primaryTextColor;
+                text-decoration: none;
+            }
+        }
+    }
+
+    .music-player {
+        height: 70px;
+        display: flex;
+        background-color: $secondaryBackground;
+
+        .col-4 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+        }
+
+        .far {
+            color: #D2D7DF;
+            font-size: 30px;
+
+            &:hover {
+                color: white;
+            }
+        }
+
+        .fas {
+            color: $progressBackground;
+            font-size: 15px;
+            margin: 0px 25px;
+
+            &:hover {
+                color: white;
+            }
+        }
+
+        p {
+            margin-bottom: 0;
+        }
+    }
+
+    .music-progress {
+        height: 30px;
+        display: flex;
+        margin: auto;
+        justify-content: center;
+        padding-top: 5px;
+        background-color: $secondaryBackground;
+
+        .progress {
+            width: 80vw;
+            height: 6px;
+            background-color: $progressBackground;
+            border-radius: 20px;
+
+            .progress-bar {
+                border-radius: 10px;
+            }
+        }
+    }
+}
+
+
+
