@@ -59,7 +59,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"  data-show="true">
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel"  data-show="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
@@ -72,9 +72,9 @@
                             <p>Ingresar para continuar</p>
                         </div>
                         <div class="col-12">
-                            <form action="/action_page.php">
-                                <input type="text" id="fname" name="fname" placeholder="Usuario"><br>
-                                <input type="password" id="lname" name="lname" placeholder="Contraseña"><br><br>
+                            <form action="login.php" method="post">
+                                <input type="text" id="username" name="username" placeholder="Usuario"><br>
+                                <input type="password" id="password" name="password" placeholder="Contraseña"><br><br>
                                 <input type="submit" value="Ingresar">
                             </form>                           
                         </div>
@@ -84,7 +84,40 @@
                                 <i class="fab fa-github"></i></p>
                         </div>
                         <div class="register-title col-12">
-                            <p>¿Aún no tiene una cuenta?  <a href="#">Registarse</a> </p>
+                            <p>¿Aún no tiene una cuenta?  <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal">Registarse</a> </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel"  data-show="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="title col-12">
+                            <img src="./images/logo.jpg" height="40" width="40" alt="">
+                            <h4>iMusic</h4>
+                        </div>
+                        <div class="login-to-continue col-12">
+                            <p>Registarse para continuar</p>
+                        </div>
+                        <div class="col-12">
+                            <form action="register.php" method="post">
+                                <input type="text" id="username" name="username" placeholder="Usuario"><br>
+                                <input type="password" id="password" name="password" placeholder="Contraseña"><br><br>
+                                <input type="submit" value="Registrarse">
+                            </form>                           
+                        </div>
+                        <div class="connect-with col-12">
+                            <p>O registrar usando</p>
+                            <p><i class="fab fa-google"></i> <i class="fab fa-facebook"></i> <i class="fab fa-twitter"></i>
+                                <i class="fab fa-github"></i></p>
+                        </div>
+                        <div class="register-title col-12">
+                            <p>¿Ya tiene una cuenta?  <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Ingresar</a> </p>
                         </div>
                     </div>
                 </div>
@@ -161,6 +194,8 @@
             </div>
         </div>
     </div>
+
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
