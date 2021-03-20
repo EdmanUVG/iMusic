@@ -289,6 +289,117 @@ body {
   text-decoration: none;
 }
 
+.container-fluid .main .filter-section form #select_genre {
+  width: 285px;
+  height: 35px;
+  color: white;
+  font-size: 14px;
+  border-radius: 4px;
+  background-color: #0F141D;
+  border: 1px solid #747981;
+}
+
+.container-fluid .main .filter-section form #select_playlist {
+  width: 285px;
+  height: 35px;
+  color: white;
+  font-size: 14px;
+  border-radius: 4px;
+  background-color: #0F141D;
+  border: 1px solid #747981;
+}
+
+.container-fluid .main .filter-section form button[type=submit] {
+  background-color: #0F141D;
+  width: 250px;
+  height: 35px;
+  color: #747981;
+  border: 1px solid #747981;
+  margin-left: 0px;
+  border-radius: 20px;
+}
+
+.container-fluid .main .filter-section .list-group {
+  background-color: #0F141D;
+  color: white;
+}
+
+.container-fluid .main .filter-section .list-group .list-group-item {
+  border-bottom: 1px solid black;
+}
+
+.container-fluid .main .filter-section .list-group .list-group-item-light {
+  background-color: #0F141D;
+  color: white;
+}
+
+.container-fluid .main .filter-section .list-group .list-group-item-light:hover {
+  background-color: #2A2A2A;
+}
+
+.container-fluid .main .filter-section #song-detail {
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.container-fluid .main .filter-section #song-detail .col-sm-12 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container-fluid .main .filter-section #song-detail .col-sm-12 h3 {
+  font-weight: 600;
+  padding-top: 15px;
+}
+
+.container-fluid .main .filter-section #song-detail .col-sm-12 .link-artist {
+  color: white;
+  text-decoration: none;
+}
+
+.container-fluid .main .filter-section #song-detail .col-sm-12 .link-artist:hover {
+  text-decoration: underline;
+}
+
+.container-fluid .main .filter-section #song-detail img {
+  width: 200px;
+  height: 200px;
+}
+
+.container-fluid .main .filter-section #song-detail button {
+  background-color: #1DB954;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  width: 260px;
+  height: 35px;
+  margin-top: 10px;
+}
+
+.container-fluid .main .filter-section #song-detail button a {
+  color: white;
+  text-decoration: none;
+}
+
 .container-fluid .music-player {
   height: 70px;
   display: -webkit-box;
