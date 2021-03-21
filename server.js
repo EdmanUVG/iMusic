@@ -42,7 +42,7 @@ app.get('/users/login', checkAuthenticated, (req, res) => {
 });
 
 app.get('/users/dashboard', checkNotAuthenticated, (req, res) => {
-    res.render('dashboard', {user: req.user.name});
+    res.render('dashboard', {user: req.user.nombre});
 });
 
 app.get("/users/logout", (req, res) => {
@@ -73,8 +73,8 @@ app.post('/users/register', async (req, res) => {
         let hashedPassword = await bcrypt.hash(password, 10);
 
         pool.query(
-            `SELECT * FROM users
-            WHERE email = $1`, [email], (err, results) => {
+            `SELECT * FROM usuarios
+            WHERE correo = $1`, [email], (err, results) => {
                if (err) {
                    throw err
                }
@@ -84,10 +84,10 @@ app.post('/users/register', async (req, res) => {
                    res.render("register", { errors });
                } else {
                    pool.query(
-                        `INSERT INTO users (name, email, password)
-                        VALUES ($1, $2, $3)
-                        RETURNING id, password`,
-                        [name, email, hashedPassword],
+                        `INSERT INTO usuarios (correo, codigo_suscripcion, codigo_tipo_usuario, contrasena, nombre)
+                        VALUES ($1, $2, $3, $4, $5)
+                        RETURNING id, contrasena`,
+                        [email, 0, 0, hashedPassword, name],
                         (err, result) => {
                             if (err){
                                 throw err;

@@ -8,7 +8,7 @@ function initialize(passport) {
   const authenticateUser = (email, password, done) => {
     console.log(email, password);
     pool.query(
-      `SELECT * FROM users WHERE email = $1`,
+      `SELECT * FROM usuarios WHERE correo = $1`,
       [email],
       (err, results) => {
         if (err) {
@@ -19,7 +19,7 @@ function initialize(passport) {
         if (results.rows.length > 0) {
           const user = results.rows[0];
 
-          bcrypt.compare(password, user.password, (err, isMatch) => {
+          bcrypt.compare(password, user.contrasena, (err, isMatch) => {
             if (err) {
               console.log(err);
             }
@@ -56,7 +56,7 @@ function initialize(passport) {
   // The fetched object is attached to the request object as req.user
 
   passport.deserializeUser((id, done) => {
-    pool.query(`SELECT * FROM users WHERE id = $1`, [id], (err, results) => {
+    pool.query(`SELECT * FROM usuarios WHERE id = $1`, [id], (err, results) => {
       if (err) {
         return done(err);
       }
