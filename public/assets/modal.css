@@ -67,7 +67,7 @@
   margin-top: 25px;
 }
 
-.modal-dialog .modal-content form input[type=text], .modal-dialog .modal-content form input[type=password] {
+.modal-dialog .modal-content form input[type=text], .modal-dialog .modal-content form input[type=email], .modal-dialog .modal-content form input[type=password] {
   width: 320px;
   height: 40px;
   color: white;
@@ -78,7 +78,7 @@
   padding-left: 10px;
 }
 
-.modal-dialog .modal-content form input[type=text]:focus, .modal-dialog .modal-content form input[type=password]:focus {
+.modal-dialog .modal-content form input[type=text]:focus, .modal-dialog .modal-content form input[type=email]:focus, .modal-dialog .modal-content form input[type=password]:focus {
   border: 1px solid #323C76;
   outline: #323C76;
 }
@@ -118,7 +118,7 @@
 }
 
 .modal-dialog .modal-content .register-title p {
-  padding-top: 50px;
+  padding-top: 40px;
   padding-left: 85px;
   color: white;
 }

@@ -39,6 +39,26 @@ body {
                     outline: #323C76;
                 }
             }
+
+            input {
+                width: 300px;
+                height: 35px;
+                color: white;
+                font-size: 14px;
+                border-radius: 4px;
+                background-color: $primaryBackground;
+                border: 1px solid $primaryTextColor;
+                border-right: none;
+                padding-right: 0px;
+                margin-right: 0px;
+                padding-left: 10px;
+                border-radius: 20px 0px 0px 20px;
+        
+                &:focus {
+                    border: 1px solid #323C76;
+                    outline: #323C76;
+                }
+            }
         
             button[type=submit] {
                 background-color: $primaryBackground;
@@ -242,6 +262,31 @@ body {
                 border-radius: 10px;
             }
         }
+    }
+}
+
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 35px;
+
+    h3 {
+        color: white;
+        font-weight: 600;
+    }
+
+    p {
+        color: white;
+    }
+
+            
+    button {
+        background-color: white;
+        width: 320px;
+        height: 40px;
+        border-radius: 30px;
     }
 }
 

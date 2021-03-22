@@ -15,6 +15,7 @@ initializePassport(passport);
 app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 
+
 app.use(
     session({
         secret: "secret",
@@ -23,11 +24,14 @@ app.use(
     })
 );
 
+
 app.use(passport.initialize());
 
 app.use(passport.session());
 
 app.use(flash());
+
+app.use('/public', express.static('public'));
 
 app.get("/", (req, res) => {
     res.render("index");
@@ -42,13 +46,89 @@ app.get('/users/login', checkAuthenticated, (req, res) => {
 });
 
 app.get('/users/dashboard', checkNotAuthenticated, (req, res) => {
-    res.render('dashboard', {user: req.user.nombre});
+    res.render('dashboard', {user: req.user.nombre, email: req.user.correo,
+         subscription: req.user.codigo_suscripcion, userRole: req.user.codigo_tipo_usuario});
+});
+
+app.get('/users/playlist', (req, res) => {
+    res.render("playlist");
+});
+
+app.get('/users/premium', (req, res) => {
+    res.render("premium");
+});
+
+app.get('/users/actualizar', (req, res) => {
+    res.render("actualizar");
 });
 
 app.get("/users/logout", (req, res) => {
     req.logout();
     res.render("index", { message: "You have logged out successfully" });
 });
+
+app.post('/users/dashboard', async(req, res) => {
+    let { playlist } = req.body;
+    pool.query(
+        `INSERT INTO playlists (id, codigo_cancion, codigo_artista, codigo_album, nombre_playlist)
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING id`,
+        [req.user.id, '1', '1', '1', playlist],
+        (err, result) => {
+            if (err){
+                throw err;
+            }
+            res.redirect('/users/dashboard');
+        }  
+    )
+});
+
+
+app.post('/users/playlist', async(req, res) => {
+    let { playlist } = req.body;
+    pool.query(
+        `INSERT INTO playlists (id, codigo_cancion, codigo_artista, codigo_album, nombre_playlist)
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING id`,
+        [req.user.id, '1', '1', '1', playlist],
+        (err, result) => {
+            if (err){
+                throw err;
+            }
+            res.redirect('/users/dashboard');
+        }  
+    )
+});
+
+app.post('/users/premium', async(req, res) => {
+
+    pool.query(
+        `UPDATE usuarios SET codigo_suscripcion = $1 WHERE correo = $2`,
+        [1, req.user.correo],
+        (err, result) => {
+            if (err){
+                throw err;
+            }
+            console.log(`${req.user.correo}`);
+            res.redirect('/users/dashboard');
+        }  
+    )
+});
+
+app.post('/users/actualizar', async(req, res) => {
+    
+    pool.query(
+        `UPDATE usuarios SET codigo_tipo_usuario = $1 WHERE correo = $2`,
+        [1, req.user.correo],
+        (err, result) => {
+            if (err){
+                throw err;
+            }
+            res.redirect('/users/dashboard');
+        }  
+    )
+});
+
 
 app.post('/users/register', async (req, res) => {
     let { name, email, password, password2 } = req.body;

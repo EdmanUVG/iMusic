@@ -6,6 +6,7 @@
     .modal-content {
         background: #1C1E21;
         
+        
         .title {
             display: flex;
             justify-content: center;
@@ -44,7 +45,7 @@
             flex-direction: column;
             margin-top: 25px;
         
-            input[type=text], input[type=password] {
+            input[type=text], input[type=email], input[type=password] {
                 width: 320px;
                 height: 40px;
                 color: white;
@@ -88,7 +89,7 @@
 
         .register-title {
             p {
-                padding-top: 50px;
+                padding-top: 40px;
                 padding-left: 85px;
                 color: white;
             }
@@ -143,6 +144,5 @@
         } 
     }
 }
-
 
 

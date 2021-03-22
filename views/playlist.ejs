@@ -10,7 +10,7 @@
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/04b6b15873.js" crossorigin="anonymous"></script>
 
-    <title>Login</title>
+    <title>iMusic</title>
 
     <link href="/public/assets/index.css" rel="stylesheet" type="text/css">
 
@@ -31,7 +31,7 @@
             <div class="main col-10">
                 <div class="row">
                     <div class="col-6">
-                        <form action="/action_page.php">
+                        <form>
                             <input type="text" placeholder="Buscar por..." name="search">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
@@ -67,8 +67,9 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="loginModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        aria-labelledby="exampleModalLabel" data-show="true">
+    <!-- Modal -->
+
+    <div class="modal fade" id="playlistModal" tabindex="-1" aria-labelledby="exampleModalLabel" data-show="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
@@ -78,36 +79,13 @@
                             <h4>iMusic</h4>
                         </div>
                         <div class="login-to-continue col-12">
-                            <p>Ingresar para continuar</p>
+                            <p>Dale nombre a tu playlist</p>
                         </div>
                         <div class="col-12">
-                            <ul>
-                                <% if(messages.success_msg) { %>
-                                <li><%= messages.success_msg %></li>
-                                <% } %>
-                            </ul>
-
-                            <ul>
-                                <% if (messages.error) { %>
-                                <li><%= messages.error %></li>
-                                <% } %>
-                            </ul>
-
-                            <form action="/users/login" method="POST">
-                                <input type="email" id="email" name="email" placeholder="Email" required /><br />
-                                <input type="password" id="password" name="password" placeholder="Password"
-                                    required /><br /><br />
-                                <input type="submit" value="Login" />
+                            <form action="/users/playlist" method="POST">
+                                <input type="text" id="playlist" name="playlist" placeholder="Playlist" autofocus><br>
+                                <input type="submit" value="Crear">
                             </form>
-                        </div>
-                        <div class="connect-with col-12">
-                            <p>O conectar usando</p>
-                            <p><i class="fab fa-google"></i> <i class="fab fa-facebook"></i> <i
-                                    class="fab fa-twitter"></i>
-                                <i class="fab fa-github"></i></p>
-                        </div>
-                        <div class="register-title col-12">
-                            <p>¿Aún no tiene una cuenta? <a href="/users/register">Registerse</a> </p>
                         </div>
                     </div>
                 </div>
@@ -130,12 +108,11 @@
 
     <script>
         $(window).on('load', function () {
+            var delayMs = 90; // delay in milliseconds
 
-            $('#loginModal').modal('show', {
-                backdrop: 'static',
-                keyboard: false
-            });
-
+            setTimeout(function () {
+                $('#playlistModal').modal('show');
+            }, delayMs);
         });
     </script>
 
