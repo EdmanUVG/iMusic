@@ -62,6 +62,30 @@ app.get('/users/actualizar', (req, res) => {
     res.render("actualizar");
 });
 
+app.get('/users/artista', (req, res) => {
+
+    async function getName() {
+        
+        const result = await pool.query(
+            `SELECT nombre from artistas WHERE codigo_artista = $1`, 
+            ['7']
+        );
+        if (!result || !result.rows || !result.rows.length) return null;
+        // return result.rows[0]["nombre"];
+        res.render('artista', {user: req.user.nombre, email: req.user.correo,
+            subscription: req.user.codigo_suscripcion, userRole: req.user.codigo_tipo_usuario, 
+            artistName: result.rows[0]["nombre"]});
+    }
+
+    getName();
+
+});
+
+app.get('/users/agregarnombreartista', (req, res) => {
+    res.render('agregarnombreartista', {user: req.user.nombre, email: req.user.correo,
+        subscription: req.user.codigo_suscripcion, userRole: req.user.codigo_tipo_usuario});
+});
+
 app.get("/users/logout", (req, res) => {
     req.logout();
     res.render("index", { message: "You have logged out successfully" });
@@ -83,7 +107,6 @@ app.post('/users/dashboard', async(req, res) => {
     )
 });
 
-
 app.post('/users/playlist', async(req, res) => {
     let { playlist } = req.body;
     pool.query(
@@ -96,6 +119,21 @@ app.post('/users/playlist', async(req, res) => {
                 throw err;
             }
             res.redirect('/users/dashboard');
+        }  
+    )
+});
+
+app.post('/users/agregarnombreartista', async(req, res) => {
+    let { nombre } = req.body;
+    pool.query(
+        `INSERT INTO artistas (codigo_artista, nombre)
+        VALUES ($1, $2)`,
+        [req.user.id, nombre],
+        (err, result) => {
+            if (err){
+                throw err;
+            }
+            res.redirect('/users/artista');
         }  
     )
 });
@@ -128,7 +166,6 @@ app.post('/users/actualizar', async(req, res) => {
         }  
     )
 });
-
 
 app.post('/users/register', async (req, res) => {
     let { name, email, password, password2 } = req.body;

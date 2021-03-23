@@ -104,6 +104,10 @@ body {
                 color: $primaryTextColor;
                 text-decoration: none;
             }
+
+            p {
+                color: white !important;
+            }
         }
 
         .filter-section {

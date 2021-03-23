@@ -309,6 +309,10 @@ body {
   text-decoration: none;
 }
 
+.container-fluid .main .add-section p {
+  color: white !important;
+}
+
 .container-fluid .main .filter-section form #select_genre {
   width: 285px;
   height: 35px;

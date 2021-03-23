@@ -19,14 +19,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="sidebar col-2">
-                <a href="/users/dashboard" style="color: white;"><i class="fas fa-home"></i> Home</a>
-
+                <a href="/users/dashboard"><i class="fas fa-home"></i> Home</a>
                 <% if(userRole != 1){ %>
-                <a href="/users/actualizar"><i class="far fa-user"></i> Soy artista</a>
+                <a href="/users/actualizar" style="color: white;"><i class="far fa-user"></i> Soy artista</a>
                 <% } else{ %>
-                <a href="/users/artista"><i class="far fa-user"></i> Soy artista</a>
+                <a href="/users/artista" style="color: white;"><i class="far fa-user"></i> Soy artista</a>
                 <% } %>
-
                 <p>PLAYLISTS</p>
                 <a href="/users/playlist"><i class="fas fa-plus"></i> New playlist</a>
             </div>
@@ -47,35 +45,17 @@
                             <a href="/users/premium">PREMIUM</a>
                         </button>
                         <% } %>
+
                     </div>
                 </div>
                 <div class="row">
-                    <div class="container filter-section">
-                        <form action="">
-                            <input type="hidden" id='hidden_token'>
-                            <div class="col-sm-6 form-group row mt-4 px-0">
-                                <select name="" id="select_genre" class="form-control form-control-sm col-sm-10">
-                                    <option>Seleccionar genero...</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-6 form-group row px-0">
-                                <select name="" id="select_playlist" class="form-control form-control-sm col-sm-10">
-                                    <option>Seleccioinar playlist...</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-6 row form-group px-0">
-                                <button type="submit" id="btn_submit" class="btn btn-success col-sm-12">Search</button>
-                            </div>
-                        </form>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="list-group song-list">
-
-                                </div>
-                            </div>
-                            <div class="col-sm-6" id="song-detail">
-                            </div>
-                        </div>
+                    <div class="add-section col-12">
+                        <a href="/users/agregarnombreartista"><i class="fas fa-plus"></i>
+                            Agregar nombre artistico</a><br>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#trackModal"><i class="fas fa-plus"></i>
+                            Agregar track</a><br>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#albumModal"><i class="fas fa-plus"></i>
+                            Agregar album</a><br>
                     </div>
                 </div>
             </div>
@@ -142,6 +122,31 @@
         </div>
     </div>
 
+    <div class="modal fade" id="nombreModal" tabindex="-1" aria-labelledby="exampleModalLabel" data-show="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="title col-12">
+                            <img src="/public/assets/logo.jpg" height="40" width="40" alt="">
+                            <h4>iMusic</h4>
+                        </div>
+                        <div class="login-to-continue col-12">
+                            <p>Ingrese tu nombre artistico</p>
+                        </div>
+                        <div class="col-12">
+                            <form action="/users/agregarnombreartista" method="POST">
+                                <input type="text" id="nombre" name="nombre" placeholder="Nombre artistico"
+                                    autofocus><br>
+                                <input type="submit" value="Crear">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"
@@ -155,6 +160,16 @@
     </script>
 
     <script src="/public/assets/app.js" type="text/javascript"></script>
+
+    <script>
+        $(window).on('load', function () {
+            var delayMs = 100; // delay in milliseconds
+
+            setTimeout(function () {
+                $('#nombreModal').modal('show');
+            }, delayMs);
+        });
+    </script>
 
 </body>
 
