@@ -13,6 +13,7 @@ body {
 
 .container-fluid {
     height: 100vh;
+    background-color: #0F141D;
 
     .main {
         background-color: $primaryBackground;
@@ -220,6 +221,34 @@ body {
             ol {
                 li {
                     color: white;
+                }
+            }
+
+            #deleteButton {
+                width: 200px;
+                height: 40px;
+                border-radius: 30px;
+                background-color: red;
+                color: white;
+                border: none;
+
+                a {
+                    color: white;
+                    text-decoration: none;
+                }
+            }
+
+            #updateButton {
+                width: 200px;
+                height: 40px;
+                border-radius: 30px;
+                background-color: white;
+                color: white;
+                border: none;
+
+                a {
+                    color: black;
+                    text-decoration: none;
                 }
             }
         }

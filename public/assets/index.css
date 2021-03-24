@@ -209,6 +209,7 @@ body {
 
 .container-fluid {
   height: 100vh;
+  background-color: #0F141D;
 }
 
 .container-fluid .main {
@@ -434,6 +435,34 @@ body {
 
 .container-fluid .main .stats-section ol li {
   color: white;
+}
+
+.container-fluid .main .stats-section #deleteButton {
+  width: 200px;
+  height: 40px;
+  border-radius: 30px;
+  background-color: red;
+  color: white;
+  border: none;
+}
+
+.container-fluid .main .stats-section #deleteButton a {
+  color: white;
+  text-decoration: none;
+}
+
+.container-fluid .main .stats-section #updateButton {
+  width: 200px;
+  height: 40px;
+  border-radius: 30px;
+  background-color: white;
+  color: white;
+  border: none;
+}
+
+.container-fluid .main .stats-section #updateButton a {
+  color: black;
+  text-decoration: none;
 }
 
 .container-fluid .music-player {
