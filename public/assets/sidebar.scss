@@ -18,6 +18,12 @@
         }
     }
 
+    #playlist {
+        &:hover {
+            color: black;
+        }
+    }
+
     p {
         color: $primaryTextColor;
         padding-left: 15px;

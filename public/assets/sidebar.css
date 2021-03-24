@@ -21,6 +21,10 @@
   color: white;
 }
 
+.sidebar #playlist:hover {
+  color: black;
+}
+
 .sidebar p {
   color: #747981;
   padding-left: 15px;

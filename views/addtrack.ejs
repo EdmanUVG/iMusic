@@ -50,6 +50,7 @@
                 </div>
                 <div class="row">
                     <div class="add-section col-12">
+
                     </div>
                 </div>
             </div>
@@ -78,8 +79,7 @@
     </div>
 
     <!-- Modal -->
-
-    <div class="modal fade" id="nombreModal" tabindex="-1" aria-labelledby="exampleModalLabel" data-show="true">
+    <div class="modal fade" id="trackModal" tabindex="-1" aria-labelledby="exampleModalLabel" data-show="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
@@ -89,12 +89,12 @@
                             <h4>iMusic</h4>
                         </div>
                         <div class="login-to-continue col-12">
-                            <p>Ingrese tu nombre artistico</p>
+                            <p>Ingrese nuevo canción</p>
                         </div>
                         <div class="col-12">
-                            <form action="/users/agregarnombreartista" method="POST">
+                            <form action="/users/addtrack" method="POST">
                                 <input autocomplete="off" type="text" id="nombre" name="nombre"
-                                    placeholder="Nombre artistico" autofocus><br>
+                                    placeholder="Nombre de la canción" autofocus autocomplete="false"><br>
                                 <input type="submit" value="Crear">
                             </form>
                         </div>
@@ -121,7 +121,7 @@
             var delayMs = 100; // delay in milliseconds
 
             setTimeout(function () {
-                $('#nombreModal').modal('show');
+                $('#trackModal').modal('show');
             }, delayMs);
         });
     </script>

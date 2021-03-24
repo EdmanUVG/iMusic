@@ -81,7 +81,7 @@
                         <div class="col-12">
                             <ul>
                                 <% if(typeof errors != 'undefined') { %> <% errors.forEach(error => { %>
-                                <li><%= error.message %></li>
+                                <li style="color:#747981; list-style-type: none;"><%= error.message %></li>
                                 <% }) %> <% } %>
                             </ul>
                             <form action="/users/register" method="POST"><br>

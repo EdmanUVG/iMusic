@@ -21,19 +21,29 @@
             <div class="sidebar col-2">
                 <a href="/users/dashboard" style="color: white;"><i class="fas fa-home"></i> Home</a>
 
-                <% if(userRole != 1){ %>
+                <% if(userRole == 0){ %>
                 <a href="/users/actualizar"><i class="far fa-user"></i> Soy artista</a>
-                <% } else{ %>
+                <% } %>
+                <% if(userRole == 1) { %>
                 <a href="/users/artista"><i class="far fa-user"></i> Soy artista</a>
                 <% } %>
+                <% if(userRole == 2) { %>
+                <a href=""> </a>
+                <% } %>
 
+                <% if(userRole != 2) { %>
                 <p>PLAYLISTS</p>
+                <ul>
+                    <li style="color:#747981; list-style-type: none;"><%= playlists %></li>
+                </ul>
                 <a href="/users/playlist"><i class="fas fa-plus"></i> New playlist</a>
+                <% } %>
+
             </div>
             <div class="main col-10">
                 <div class="row">
                     <div class="col-6">
-                        <form action="/action_page.php">
+                        <form>
                             <input type="text" placeholder="Buscar por..." name="search">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
@@ -50,6 +60,63 @@
                     </div>
                 </div>
                 <div class="row">
+                    <% if(userRole == 2 ) { %>
+                    <div class="container stats-section">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <br />
+                                <p><b>Albúm más reciente:</b></p>
+                                <ol>
+                                    <li> <%= mostRecentAlbum %> </li>
+                                </ol>
+                            </div>
+                            <div class="col-md-6">
+                                <br />
+                                <p><b>Artista con más popularidad:</b></p>
+                                <ol>
+                                    <li> <%= mostPopularArtist %> </li>
+                                    <li> <%= mostPopularArtist2 %> </li>
+                                    <li> <%= mostPopularArtist3 %> </li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <br />
+                                <p><b>Cantidad de nuevas suscripciones durante los últimos 6 meses:
+                                    </b></p>
+                                <p> <%= numberNewSubscriptions %> </p>
+                            </div>
+                            <div class="col-md-6">
+                                <br />
+                                <p><b>Artistas con mayor producción musical:</b></p>
+                                <ol>
+                                    <li> <%= artistWithMoreProduction %> </li>
+                                    <li> <%= artistWithMoreProduction2 %> </li>
+                                    <li> <%= artistWithMoreProduction3 %> </li>
+                                </ol>
+                            </div>
+                            <div class="col-md-6">
+                                <br />
+                                <p><b>Géneros más populares: </b></p>
+                                <ol>
+                                    <li> <%= popularGenres %> </li>
+                                    <li> <%= popularGenres2 %> </li>
+                                    <li> <%= popularGenres3 %> </li>
+                                </ol>
+                            </div>
+                            <div class="col-md-6">
+                                <br />
+                                <p><b>Usuarios más activos en la plataforma: </b></p>
+                                <ol>
+                                    <li> <%= amountLogs %> </li>
+                                    <li> <%= amountLogs2 %> </li>
+                                    <li> <%= amountLogs3 %> </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
                     <div class="container filter-section">
                         <form action="">
                             <input type="hidden" id='hidden_token'>
@@ -73,8 +140,27 @@
 
                                 </div>
                             </div>
+
+                            <% if(userRole == 0 || userRole == 1) { %>
+
+                            <!-- SI NO ES PREMIUM -->
+                            <% if(subscription == 0) { %>
+
+                            <% if( amountPlays < 3)  {%>
                             <div class="col-sm-6" id="song-detail">
                             </div>
+                            <% } else {%>
+                            <div class="col-sm-6" id="song-detail" style="position:absolute; left: -9999px;">
+                            </div>
+                            <% } %>
+
+                            <!-- ENTONCES SI ES PREMIUM -->
+                            <% } else { %>
+                            <div class="col-sm-6" id="song-detail">
+                            </div>
+                            <% } %>
+
+                            <% } %>
                         </div>
                     </div>
                 </div>
@@ -82,23 +168,29 @@
         </div>
         <div class="row">
             <div class="music-player col-12">
+                <% if(userRole != 2) { %>
                 <div class="col-4"></div>
                 <div class="col-4">
                     <p><i class="fas fa-step-backward"></i></p>
-                    <p><i class="far fa-play-circle"></i></p>
+                    <a href="/users/canciones"><i class="far fa-play-circle"></i></a>
                     <p><i class="fas fa-step-forward"></i></p>
                 </div>
                 <div class="col-4"></div>
+                <% }%>
             </div>
         </div>
         <div class="row">
             <div class="music-progress col-12">
+                <% if(userRole != 2) { %>
+
                 <div class="progress">
                     <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
                         aria-valuemax="100" style="width:70%">
                         <span class="sr-only">70% Complete</span>
                     </div>
                 </div>
+
+                <% } %>
             </div>
         </div>
     </div>
@@ -118,10 +210,12 @@
                             <p><b>Nombre: </b> <%= user %></p><br />
                             <p><b>Correo: </b> <%= email %></p><br />
 
+                            <% if(userRole != 2)  { %>
                             <% if(subscription != 1){ %>
                             <p><b>Premium: </b> No</p><br />
                             <% } else{ %>
                             <p><b>Premium: </b> Si</p><br />
+                            <% } %>
                             <% } %>
 
                             <% if(userRole == 0){ %>
@@ -131,7 +225,7 @@
                             <p><b>Tipo de usuario: </b> Artista</p><br />
                             <% } %>
                             <% if(userRole == 2){ %>
-                            <p><b>Tipo de usuario: </b> Manager</p><br />
+                            <p><b>Tipo de usuario: </b> Super usuario</p><br />
                             <% } %>
 
                             <button id="logout-btn"><a href="/users/logout">Logout</a></button><br /><br />
