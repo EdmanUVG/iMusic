@@ -46,6 +46,12 @@
                         </button>
                         <% } %>
 
+                        <% if(messages.success_msg) { %>
+                        <p
+                            style="color: white; margin-bottom: 0xp; padding-top: 20px; background-color: #3393D4; padding-left: 15px; padding-right: 15px; padding-bottom: 15px;">
+                            <%= messages.success_msg %></p>
+                        <% } %>
+
                     </div>
                 </div>
                 <div class="row">
@@ -64,6 +70,10 @@
                             Agregar track</a><br>
                         <a href="#" data-bs-toggle="modal" data-bs-target="#albumModal"><i class="fas fa-plus"></i>
                             Agregar album</a><br>
+
+                        <br />
+                        <br />
+                        <p>Mis canciones: </p>
 
 
                     </div>

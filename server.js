@@ -49,8 +49,7 @@ app.get('/users/dashboard', checkNotAuthenticated, (req, res) => {
     try {
         pool.connect(async (error, client, release) => {
             let resp = await client.query (
-                `SELECT nombre_playlist from playlists
-                WHERE EXISTS( SELECT nombre_playlist FROM playlists WHERE id = $1 LIMIT 5)`, [req.user.id] );
+                ` SELECT nombre_playlist FROM playlists WHERE id = $1 ORDER BY 1 ASC LIMIT 5`, [req.user.id] );
 
             let recentAlbum = await client.query (`SELECT * FROM albums WHERE fecha_album = (
                 SELECT MAX(fecha_album) FROM albums)`);
@@ -85,7 +84,6 @@ app.get('/users/dashboard', checkNotAuthenticated, (req, res) => {
                     artistWithMoreProduction3: withMoreProduction.rows[2]["nombre"],
                     popularGenres: popularGenre.rows[0]["descripcion_genero"],
                     popularGenres2: popularGenre.rows[1]["descripcion_genero"],
-                    popularGenres3: popularGenre.rows[2]["descripcion_genero"],
                     amountLogs: amountLog.rows[0]["correo"],
                     amountLogs2: amountLog.rows[1]["correo"],
                     amountLogs3: amountLog.rows[2]["correo"]});
@@ -111,6 +109,10 @@ app.get('/users/canciones', (req, res) => {
     res.render("canciones");
 });
 
+app.get('/users/addtrack', (req, res) => {
+    res.render("addtrack");
+});
+
 app.get('/users/deleteArtist', (req, res) => {
     res.render("deleteArtist");
 });
@@ -131,8 +133,7 @@ app.get('/users/artista', (req, res) => {
 
     try {
         pool.connect(async (error, client, release) => {
-            let resp = await client.query (`SELECT nombre FROM artistas 
-            WHERE EXISTS(SELECT nombre FROM artistas WHERE codigo_artista = $1)`, [req.user.id.toString()]);
+            let resp = await client.query (`SELECT nombre FROM artistas WHERE codigo_artista = $1 order by nombre desc`, [req.user.id.toString()]);
 
             res.render('artista', {user: req.user.nombre, email: req.user.correo,
             subscription: req.user.codigo_suscripcion, userRole: req.user.codigo_tipo_usuario, 
@@ -181,7 +182,25 @@ app.post('/users/playlist', async(req, res) => {
             if (err){
                 throw err;
             }
+            req.flash("success_msg", "¡Playlist agregado exitosamente!");
             res.redirect('/users/dashboard');
+        }  
+    )
+});
+
+
+app.post('/users/addtrack', async(req, res) => {
+    let { nombre } = req.body;
+    pool.query(
+        `INSERT INTO canciones (codigo_cancion, codigo_artista, codigo_album, codigo_genero, nombre_cancion)
+        VALUES ($1, $2, $3, $4, $5)`,
+        [req.user.id.toString(), '1', '1', '1', nombre],
+        (err, result) => {
+            if (err){
+                throw err;
+            }
+            req.flash("success_msg", "Canción agregado exitosamente!");
+            res.redirect('/users/artista');
         }  
     )
 });
@@ -195,6 +214,7 @@ app.post('/users/agregarnombreartista', async(req, res) => {
             if (err){
                 throw err;
             }
+            req.flash("success_msg", "Nombre actualizado exitosamente!");
             res.redirect('/users/artista');
         }  
     )
