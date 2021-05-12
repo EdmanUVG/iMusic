@@ -204,7 +204,7 @@
 
 body {
   font-family: "Roboto", sans-serif;
-  background-color: #2C2C31;
+  background-color: #0F141D;
 }
 
 .container-fluid {
@@ -433,7 +433,7 @@ body {
 }
 
 .container-fluid .main .stats-section p {
-  color: white;
+  color: #EBFAFC;
 }
 
 .container-fluid .main .stats-section ol li {
@@ -479,6 +479,20 @@ body {
 
 .container-fluid .main .stats-section #getButton a {
   color: white;
+  text-decoration: none;
+}
+
+.container-fluid .main .stats-section #retrieveButton {
+  width: 200px;
+  height: 40px;
+  border-radius: 30px;
+  background-color: #00D1EA;
+  color: white;
+  border: none;
+}
+
+.container-fluid .main .stats-section #retrieveButton a {
+  color: #EBFAFC;
   text-decoration: none;
 }
 
@@ -584,5 +598,28 @@ body {
   width: 320px;
   height: 40px;
   border-radius: 30px;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  min-width: 100px;
+}
+
+tr:nth-child(even) {
+  color: white;
+  background-color: #0F141D;
+}
+
+tr:nth-child(odd) {
+  color: white;
+  background-color: #0F141D;
 }
 /*# sourceMappingURL=index.css.map */

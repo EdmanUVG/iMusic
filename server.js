@@ -160,6 +160,68 @@ app.get('/users/artista', (req, res) => {
     }
 });
 
+app.get('/users/bitacora', (req, res) => {
+    try {
+        pool.connect(async (error, client, release) => {
+            let resp = await client.query (`SELECT * FROM bitacora ORDER  BY ctid DESC;`);
+
+            res.render('bitacora', {user: req.user.nombre, email: req.user.correo,
+            subscription: req.user.codigo_suscripcion, userRole: req.user.codigo_tipo_usuario, 
+            fechaUno: resp.rows[0]["fecha_hora_bitacora"],
+            tablaUno: resp.rows[0]["tabla"],
+            columnaUno: resp.rows[0]["columna"],
+            accionUno: resp.rows[0]["accion"],
+            usuarioUno: resp.rows[0]["usuario"],
+            datoAntesUno: resp.rows[0]["dato_antes"],
+            datoDespuesUno: resp.rows[0]["dato_despues"],
+            fechaDos: resp.rows[1]["fecha_hora_bitacora"],
+            tablaDos: resp.rows[1]["tabla"],
+            columnaDos: resp.rows[1]["columna"],
+            accionDos: resp.rows[1]["accion"],
+            usuarioDos: resp.rows[1]["usuario"],
+            datoAntesDos: resp.rows[1]["dato_antes"],
+            datoDespuesDos: resp.rows[1]["dato_despues"],
+            fechaTres: resp.rows[2]["fecha_hora_bitacora"],
+            tablaTres: resp.rows[2]["tabla"],
+            columnaTres: resp.rows[2]["columna"],
+            accionTres: resp.rows[2]["accion"],
+            usuarioTres: resp.rows[2]["usuario"],
+            datoAntesTres: resp.rows[2]["dato_antes"],
+            datoDespuesTres: resp.rows[2]["dato_despues"],
+            fechaCuatro: resp.rows[3]["fecha_hora_bitacora"],
+            tablaCuatro: resp.rows[3]["tabla"],
+            columnaCuatro: resp.rows[3]["columna"],
+            accionCuatro: resp.rows[3]["accion"],
+            usuarioCuatro: resp.rows[3]["usuario"],
+            datoAntesCuatro: resp.rows[3]["dato_antes"],
+            datoDespuesCuatro: resp.rows[3]["dato_despues"],
+            fechaCinco: resp.rows[4]["fecha_hora_bitacora"],
+            tablaCinco: resp.rows[4]["tabla"],
+            columnaCinco: resp.rows[4]["columna"],
+            accionCinco: resp.rows[4]["accion"],
+            usuarioCinco: resp.rows[4]["usuario"],
+            datoAntesCinco: resp.rows[4]["dato_antes"],
+            datoDespuesCinco: resp.rows[4]["dato_despues"],
+            fechaSeis: resp.rows[5]["fecha_hora_bitacora"],
+            tablaSeis: resp.rows[5]["tabla"],
+            columnaSeis: resp.rows[5]["columna"],
+            accionSeis: resp.rows[5]["accion"],
+            usuarioSeis: resp.rows[5]["usuario"],
+            datoAntesSeis: resp.rows[5]["dato_antes"],
+            datoDespuesSeis: resp.rows[5]["dato_despues"],
+            fechaSiete: resp.rows[6]["fecha_hora_bitacora"],
+            tablaSiete: resp.rows[6]["tabla"],
+            columnaSiete: resp.rows[6]["columna"],
+            accionSiete: resp.rows[6]["accion"],
+            usuarioSiete: resp.rows[6]["usuario"],
+            datoAntesSiete: resp.rows[6]["dato_antes"],
+            datoDespuesSiete: resp.rows[6]["dato_despues"]});
+        })
+    } catch(error) {
+        console.log(error);
+    }
+});
+
 
 app.get('/users/reportes', (req, res) => {
     res.render('reportes');
@@ -355,6 +417,72 @@ app.post('/users/updatetrack', async(req, res) => {
                 res.redirect('/users/dashboard');
             } else {
                 req.flash("success_msg", "¡La canción fue actualizada exitosamente!");
+                res.redirect('/users/dashboard');
+            }
+        })
+    } catch(error) {
+        console.log(error);
+    }
+});
+
+app.post('/users/deactivatetrack', async(req, res) => {
+
+    let { nombre } = req.body;
+
+    try {
+        pool.connect(async (error, client, release) => {
+            let resp = await client.query(`UPDATE canciones SET estado_cancion = $1 WHERE nombre_cancion = $2`, ["DESACTIVADO", nombre]);
+  
+            if (resp === "" || resp === null) {
+                req.flash("error_msg", "¡La canción no esta en la base de datos!");
+                res.redirect('/users/dashboard');
+            } else {
+                req.flash("success_msg", "¡La canción fue desactivada exitosamente!");
+                res.redirect('/users/dashboard');
+            }
+        })
+    } catch(error) {
+        console.log(error);
+    }
+});
+
+
+app.post('/users/deactivatealbum', async(req, res) => {
+
+    let { nombre } = req.body;
+
+    try {
+        pool.connect(async (error, client, release) => {
+            let resp = await client.query(`UPDATE albums SET estado_album = $1 WHERE nombre_album = $2`, ["DESACTIVADO", nombre]);
+  
+            if (resp === "" || resp === null) {
+                req.flash("error_msg", "¡El álbum no esta en la base de datos!");
+                res.redirect('/users/dashboard');
+            } else {
+                req.flash("success_msg", "¡El álbum fue desactivada exitosamente!");
+                res.redirect('/users/dashboard');
+            }
+        })
+    } catch(error) {
+        console.log(error);
+    }
+});
+
+app.post('/users/deactivateuserwithoutsubscription', async(req, res) => {
+
+    let { nombre } = req.body;
+
+    try {
+        pool.connect(async (error, client, release) => {
+            // let resp = await client.query(`UPDATE usuarios SET codigo_tipo_usuario = $1 WHERE correo = $2 AND codigo_suscripcion = $3`, [111, nombre, 0]);
+  
+            let resp = await client.query(`SELECT * FROM usuarios`);
+
+            if (resp === "" || resp === null) {
+                req.flash("error_msg", "¡El usuario no esta en la base de datos!");
+                res.redirect('/users/dashboard');
+            } else {
+                req.flash("success_msg", "¡El usuario fue desactivada exitosamente!");
                 res.redirect('/users/dashboard');
             }
         })

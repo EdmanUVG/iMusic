@@ -48,10 +48,12 @@
             <div class="main col-10">
                 <div class="row">
                     <div class="col-6">
+                        <% if(userRole == 0 || userRole == 1) { %>
                         <form>
                             <input type="text" placeholder="Buscar por..." name="search">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
+                        <% } %>
                     </div>
                     <div class="premium-button col-6">
                         <a href="#" data-bs-toggle="modal" data-bs-target="#profileModal"><i
@@ -132,78 +134,131 @@
                             </div>
                             <div class="col-md-6">
                                 <br />
+                                <br />
                                 <p><b>Eliminar artista (canciones, albumes): </b></p>
                                 <button id="deleteButton"><a href="/users/deleteArtist">Eliminar</a></button>
                             </div>
                             <div class="col-md-6">
                                 <br />
+                                <br />
                                 <p><b>Modificar nombre de artista: </b></p>
-                                <button id="updateButton"><a href="/users/updateartist">Modificar</a></button>
+                                <button id="getButton"><a href="/users/updateartist">Modificar</a></button>
                             </div>
                             <div class="col-md-6" style="background-color: #0F141D;">
+                                <br />
                                 <br />
                                 <p><b>Modificar nombre de album: </b></p>
-                                <button id="updateButton"><a href="/users/udpatealbum">Modificar</a></button>
-                            </div>
-                            <div class="col-md-6" style="background-color: #0F141D;">
-                                <br />
-                                <p><b>Modificar canciones: </b></p>
-                                <button id="updateButton"><a href="/users/updatetrack">Modificar</a></button>
+                                <button id="getButton"><a href="/users/udpatealbum">Modificar</a></button>
                             </div>
                             <div class="col-md-6" style="background-color: #0F141D;">
                                 <br />
                                 <br />
-                                <br />
-                                <br />
-                                <p><b>Modificar info de track: </b></p>
-                                <button id="updateButton"><a href="/users/udpatealbum">Modificar</a></button>
+                                <p><b>Modificar canciones </b></p>
+                                <button id="getButton"><a href="/users/updatetrack">Modificar</a></button>
                             </div>
+                            <div class="col-md-12"
+                                style="background-color: #0F141D; display: flex; justify-content: start; text-align: start; margin-top: 80px;">
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <h2 style="color: #FFFFFF; margin-top: 30px; font-weight: 700;">Monitoreo</h2>
+                                <br />
+                            </div>
+                            <% if(userRole == 2 || userRole == 3 ) { %>
                             <div class="col-md-6" style="background-color: #0F141D;">
                                 <br />
-                                <br />
-                                <br />
-                                <br />
-                                <p><b>Desactivar tracks: </b></p>
+                                <p><b>Desactivar track </b></p>
                                 <button id="deleteButton"><a href="/users/deactivatetrack">Desactivar track</a></button>
                             </div>
                             <div class="col-md-6" style="background-color: #0F141D;">
                                 <br />
-                                <p><b>Descativar albumes: </b></p>
+                                <p><b>Desactivar álbum </b></p>
                                 <button id="deleteButton"><a href="/users/deactivatealbum">Desactivar
                                         álbum</a></button>
                             </div>
                             <div class="col-md-6" style="background-color: #0F141D;">
                                 <br />
-                                <p><b>Desactivar usuarios sin suscripción: </b></p>
+                                <br />
+                                <p><b>Desactivar usuarios sin suscripción </b></p>
                                 <button id="deleteButton"><a href="/users/deactivateuserwithoutsubscription">Desactivar
                                         usuario</a></button>
                             </div>
                             <div class="col-md-6" style="background-color: #0F141D;">
                                 <br />
-                                <p><b>Eliminar suscipciones de usuarios: </b></p>
-                                <button id="updateButton"><a
+                                <br />
+                                <p><b>Desactivar usuarios registrados como artistas </b></p>
+                                <button id="deleteButton"><a href="/users/deactivateuserartist">Desactivar
+                                        usuario</a></button>
+                            </div>
+                            <% } %>
+                            <div class="col-md-6" style="background-color: #0F141D;">
+                                <br />
+                                <br />
+                                <p><b>Eliminar suscipciones de usuarios </b></p>
+                                <button id="getButton"><a
                                         href="/users/deactivateuserwithoutsubscription">Modificar</a></button>
                             </div>
                             <div class="col-md-6" style="background-color: #0F141D;">
                                 <br />
-                                <p><b>Desactivar usuarios registrados como artistas: </b></p>
-                                <button id="deleteButton"><a href="/users/deactivateuserartist">Desactivar
-                                        usuario</a></button>
+                                <br />
+                                <p><b>Asociar un usuario existente a un perfil de monitoreo </b></p>
+                                <button id="getButton"><a href="/users/udpatealbum">Modificar</a></button>
                             </div>
                             <div class="col-md-6" style="background-color: #0F141D;">
                                 <br />
-                                <p><b>Asociar un usuario existente a un perfil de monitoreo: </b></p>
-                                <button id="updateButton"><a href="/users/udpatealbum">Modificar</a></button>
-                            </div>
-                            <div class="col-md-6" style="background-color: #0F141D;">
                                 <br />
-                                <p><b> Generar los reportes ofrecidos por la plataforma: </b></p>
+                                <p><b> Generar los reportes ofrecidos por la plataforma </b></p>
                                 <button id="getButton"><a href="/users/reportes">Obtener reporte</a></button>
                             </div>
                             <div class="col-md-6" style="background-color: #0F141D;">
                                 <br />
-                                <p><b>Consulta de bitácora de operaciones: </b></p>
-                                <button id="getButton"><a href="/users/udpatealbum">Consultar bitácora</a></button>
+                                <br />
+                                <p><b>Consulta de bitácora de operaciones </b></p>
+                                <button id="getButton"><a href="/users/bitacora">Consultar bitácora</a></button>
+                            </div>
+                            <div class="col-md-12"
+                                style="background-color: #0F141D; display: flex; justify-content: start; text-align: start; margin-top: 80px;">
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <h2 style="color: #FFFFFF; margin-top: 30px; font-weight: 700;">Reportería</h2>
+                                <br />
+                            </div>
+                            <div class="col-md-6" style="background-color: #0F141D;">
+                                <br />
+                                <p><b> Total de reproducciones por semana </b></p>
+                                <button id="retrieveButton"><a href="/users/reportes">Obtener reporte</a></button>
+                            </div>
+                            <div class="col-md-6" style="background-color: #0F141D;">
+                                <br />
+                                <p><b> Los N artistas con las mayores reproducciones </b></p>
+                                <button id="retrieveButton"><a href="/users/udpatealbum">Obtener reporte</a></button>
+                            </div>
+                            <div class="col-md-6" style="background-color: #0F141D;">
+                                <br />
+                                <br />
+                                <p><b> Total de reproducciones por género </b></p>
+                                <button id="retrieveButton"><a href="/users/reportes">Obtener reporte</a></button>
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                            </div>
+                            <div class="col-md-6" style="background-color: #0F141D;">
+                                <br />
+                                <br />
+                                <p><b> Las N canciones con más reproducciones para un artista </b></p>
+                                <button id="retrieveButton"><a href="/users/udpatealbum">Obtener reporte</a></button>
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
                             </div>
                         </div>
                     </div>

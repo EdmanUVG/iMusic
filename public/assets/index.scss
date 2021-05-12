@@ -8,7 +8,8 @@
 
 body {
     font-family: "Roboto", sans-serif;
-    background-color: #2C2C31;
+    // background-color: #2C2C31;
+    background-color:  $primaryBackground;
   }
 
 .container-fluid {
@@ -220,7 +221,7 @@ body {
 
         .stats-section {
             p {
-                color: white;
+                color: #EBFAFC;
             }
 
             ol {
@@ -267,6 +268,20 @@ body {
 
                 a {
                     color: white;
+                    text-decoration: none;
+                }
+            }
+            
+            #retrieveButton {
+                width: 200px;
+                height: 40px;
+                border-radius: 30px;
+                background-color:#00D1EA;
+                color: white;
+                border: none;
+
+                a {
+                    color: #EBFAFC;
                     text-decoration: none;
                 }
             }
@@ -355,5 +370,28 @@ body {
     }
 }
 
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    min-width: 100px;
+  }
+  
+  tr:nth-child(even) {
+    color: white;
+    background-color: $primaryBackground;
+  }
+
+  tr:nth-child(odd) {
+    color: white;
+    background-color:$primaryBackground;
+  }
 
 
