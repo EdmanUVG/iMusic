@@ -12,12 +12,12 @@ body {
   }
 
 .container-fluid {
-    height: 100vh;
+    // height: 100vh;
     background-color: #0F141D;
 
     .main {
         background-color: $primaryBackground;
-        height: calc(100vh - 100px);
+        // height: calc(100vh - 100px);
 
         form {
             margin-top: 15px;
@@ -88,6 +88,11 @@ body {
                 outline: none;
                 border: none;
                 background-image: linear-gradient(to right, red , yellow);
+
+                a {
+                    color: white;
+                    text-decoration: none;
+                }
             }
 
             .far {
@@ -248,6 +253,20 @@ body {
 
                 a {
                     color: black;
+                    text-decoration: none;
+                }
+            }
+
+            #getButton {
+                width: 200px;
+                height: 40px;
+                border-radius: 30px;
+                background-color:#3292D4;
+                color: white;
+                border: none;
+
+                a {
+                    color: white;
                     text-decoration: none;
                 }
             }

@@ -129,6 +129,22 @@ app.get('/users/updatetrack', (req, res) => {
     res.render("updatetrack");
 });
 
+app.get('/users/deactivateuserartist', (req, res) => {
+    res.render("deactivateuserartist");
+});
+
+app.get('/users/deactivateuserwithoutsubscription', (req, res) => {
+    res.render("deactivateuserwithoutsubscription");
+});
+
+app.get('/users/deactivatetrack', (req, res) => {
+    res.render("deactivatetrack");
+});
+
+app.get('/users/deactivatealbum', (req, res) => {
+    res.render("deactivatealbum");
+});
+
 app.get('/users/artista', (req, res) => {
 
     try {
@@ -142,6 +158,11 @@ app.get('/users/artista', (req, res) => {
     } catch(error) {
         console.log(error);
     }
+});
+
+
+app.get('/users/reportes', (req, res) => {
+    res.render('reportes');
 });
 
 app.get('/users/agregarnombreartista', (req, res) => {
@@ -175,9 +196,8 @@ app.post('/users/playlist', async(req, res) => {
     let { playlist } = req.body;
     pool.query(
         `INSERT INTO playlists (id, codigo_cancion, codigo_artista, codigo_album, nombre_playlist)
-        VALUES ($1, $2, $3, $4, $5)
-        RETURNING id`,
-        [req.user.id, '1', '1', '1', playlist],
+        VALUES ($1, $2, $3, $4, $5)`,
+        [req.user.id, 'adsaffkhl12g', '5ZsFI1h6hIdQRw2ti0hz81', '2yuQqhSklmfWgn8lmJNk5t', playlist],
         (err, result) => {
             if (err){
                 throw err;
@@ -391,9 +411,9 @@ app.post('/users/register', async (req, res) => {
                    res.render("register", { errors });
                } else {
                    pool.query(
-                        `INSERT INTO usuarios (correo, codigo_suscripcion, codigo_tipo_usuario, contrasena, nombre,
+                        `INSERT INTO usuarios (id, correo, codigo_suscripcion, codigo_tipo_usuario, contrasena, nombre,
                             cantidad_veces_logeado, cantidad_canciones_usuarios)
-                        VALUES ($1, $2, $3, $4, $5, $6, $7)
+                        VALUES (24, $1, $2, $3, $4, $5, $6, $7)
                         RETURNING id, contrasena`,
                         [email, 0, 0, hashedPassword, name, 1, 0],
                         (err, result) => {
@@ -408,6 +428,10 @@ app.post('/users/register', async (req, res) => {
             }
         );
     }
+});
+
+app.post('/users/reportes', (req, res) => {
+    res.render('reportes');
 });
 
 app.post("/users/login", passport.authenticate("local", {

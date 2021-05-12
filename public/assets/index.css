@@ -208,13 +208,11 @@ body {
 }
 
 .container-fluid {
-  height: 100vh;
   background-color: #0F141D;
 }
 
 .container-fluid .main {
   background-color: #0F141D;
-  height: calc(100vh - 100px);
 }
 
 .container-fluid .main form {
@@ -294,6 +292,11 @@ body {
   border: none;
   background-image: -webkit-gradient(linear, left top, right top, from(red), to(yellow));
   background-image: linear-gradient(to right, red, yellow);
+}
+
+.container-fluid .main .premium-button button a {
+  color: white;
+  text-decoration: none;
 }
 
 .container-fluid .main .premium-button .far {
@@ -462,6 +465,20 @@ body {
 
 .container-fluid .main .stats-section #updateButton a {
   color: black;
+  text-decoration: none;
+}
+
+.container-fluid .main .stats-section #getButton {
+  width: 200px;
+  height: 40px;
+  border-radius: 30px;
+  background-color: #3292D4;
+  color: white;
+  border: none;
+}
+
+.container-fluid .main .stats-section #getButton a {
+  color: white;
   text-decoration: none;
 }
 
