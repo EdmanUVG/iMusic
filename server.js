@@ -320,10 +320,9 @@ app.get('/users/reproduccionesporgenero', (req, res) => {
 
 app.get('/users/cancionesreproducciones', (req, res) => {
 
-    let { fechaInicio, fechaFinal, limite } = req.body;
     try {
         pool.connect(async (error, client, release) => {
-            let resp = await client.query (`SELECT * FROM TOP_CANCIONES_ARTISTA($1);`, ['Olivia Rodrigo']);
+            let resp = await client.query (`SELECT * FROM TOP_CANCIONES_ARTISTA('Olivia Rodrigo');`);
 
             res.render('cancionesreproducciones', {user: req.user.nombre, email: req.user.correo,
             subscription: req.user.codigo_suscripcion, userRole: req.user.codigo_tipo_usuario, 
@@ -342,6 +341,21 @@ app.get('/users/reportes', (req, res) => {
             let resp = await client.query (`SELECT * FROM COMISIONES_ARTISTA('Olivia Rodrigo');`);
 
             res.render('reportes', {user: req.user.nombre, email: req.user.correo,
+            subscription: req.user.codigo_suscripcion, userRole: req.user.codigo_tipo_usuario, 
+            cancionUno: resp.rows[0]["cancion_artista"],
+            pagoUno: resp.rows[0]["pago"]});
+        })
+    } catch(error) {
+        console.log(error);
+    }
+});
+
+app.get('/users/comisiones', (req, res) => {
+    try {
+        pool.connect(async (error, client, release) => {
+            let resp = await client.query (`SELECT * FROM COMISIONES_ARTISTA('Olivia Rodrigo');`);
+
+            res.render('comisiones', {user: req.user.nombre, email: req.user.correo,
             subscription: req.user.codigo_suscripcion, userRole: req.user.codigo_tipo_usuario, 
             cancionUno: resp.rows[0]["cancion_artista"],
             pagoUno: resp.rows[0]["pago"]});
@@ -620,10 +634,9 @@ app.post('/users/deactivateuserwithoutsubscription', async(req, res) => {
 
     try {
         pool.connect(async (error, client, release) => {
-            let resp = await client.query(`UPDATE usuarios SET codigo_tipo_usuario = $1 WHERE (correo = $2 and codigo_suscripcion = $3)`, [99, nombre, 0]);
-  
-            // let resp = await client.query(`SELECT * FROM usuarios`);
-            console.log(resp.rowCount)
+            let resp = await client.query(`UPDATE usuarios SET codigo_tipo_usuario = $1 WHERE (correo = $2 and codigo_suscripcion = $3
+                AND codigo_tipo_usuario != 2 AND codigo_tipo_usuario != 3 AND codigo_tipo_usuario != 4 AND codigo_tipo_usuario != 3 
+                AND codigo_tipo_usuario != 99)`, [99, nombre, 0]);
 
             if (resp.rowCount === 0) {
                 req.flash("error_msg", "¡El usuario posee una suscripción activa!");
@@ -648,9 +661,6 @@ app.post('/users/deactivatesubscription', async(req, res) => {
             AND codigo_tipo_usuario != 2 AND codigo_tipo_usuario != 3 AND codigo_tipo_usuario != 4 AND codigo_tipo_usuario != 3 
             AND codigo_tipo_usuario != 99)
             `, [0, nombre]);
-  
-            // let resp = await client.query(`SELECT * FROM usuarios`);
-            console.log(resp.rowCount)
 
             if (resp.rowCount === 0) {
                 req.flash("error_msg", "¡El usuario posee provilegios");
@@ -738,7 +748,7 @@ app.post('/users/register', async (req, res) => {
                    pool.query(
                         `INSERT INTO usuarios (id, correo, codigo_suscripcion, codigo_tipo_usuario, contrasena, nombre,
                             cantidad_veces_logeado, cantidad_canciones_usuarios)
-                        VALUES (24, $1, $2, $3, $4, $5, $6, $7)
+                        VALUES (33, $1, $2, $3, $4, $5, $6, $7)
                         RETURNING id, contrasena`,
                         [email, 0, 0, hashedPassword, name, 1, 0],
                         (err, result) => {
@@ -758,6 +768,12 @@ app.post('/users/register', async (req, res) => {
 app.post('/users/reportes', (req, res) => {
     res.render('reportes');
 });
+
+app.post('/users/comisiones', (req, res) => {
+    res.render('comisiones');
+});
+
+
 
 app.post("/users/login", passport.authenticate("local", {
       successRedirect: "/users/dashboard",
