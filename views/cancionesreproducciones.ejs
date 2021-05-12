@@ -18,15 +18,20 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="sidebar col-2" style="height: 100vh;">
-                <a href="/users/dashboard" style="color: #04A0C0;"><i class="fas fa-home"></i> Home</a>
+            <div class="sidebar col-2">
+                <a href="/users/dashboard"><i class="fas fa-home"></i> Home</a>
             </div>
-            <div class="main col-10" style="height: 100vh;">
+            <div class="main col-10">
                 <div class="row">
-                    <div class="col-12" style="background-image: url('/public/assets/spotify.png'); height: 300px;  ">
-                        <h2 style="color: white; margin-top: 230px; margin-left: 30px;">Reportes</h2>
-                    </div>>
-                    <div class="col-12">
+                    <div class="col-6">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="add-section col-12">
+
+                        <br />
+                        <br />
+                        <h2 style="color: white"> canciones con más reproducciones para un artista </h2>
                         <br />
                         <br />
 
@@ -34,12 +39,17 @@
                             <tr>
                                 <th>#</th>
                                 <th>Canción</th>
-                                <th>Pago</th>
+                                <th>Total</th>
                             </tr>
                             <tr>
                                 <td>1</td>
                                 <td><%= cancionUno %></td>
-                                <td><%= pagoUno %></td>
+                                <td><%= totalUno %></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><%= cancionDos %></td>
+                                <td><%= totalDos %></td>
                             </tr>
                         </table>
 
@@ -47,7 +57,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"

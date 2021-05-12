@@ -166,7 +166,7 @@
 }
 
 .sidebar {
-  background-color: #0F141D;
+  background-color: #101727;
   height: calc(100vh - 100px);
   display: -webkit-box;
   display: -ms-flexbox;
@@ -204,7 +204,7 @@
 
 body {
   font-family: "Roboto", sans-serif;
-  background-color: #0F141D;
+  background-color: #101727;
 }
 
 .container-fluid {
@@ -212,7 +212,8 @@ body {
 }
 
 .container-fluid .main {
-  background-color: #0F141D;
+  background-color: #0C1221;
+  height: calc(100vh - 100px);
 }
 
 .container-fluid .main form {
@@ -225,7 +226,7 @@ body {
   color: white;
   font-size: 14px;
   border-radius: 4px;
-  background-color: #0F141D;
+  background-color: #101727;
   border: 1px solid #747981;
   border-right: none;
   padding-right: 0px;
@@ -245,7 +246,7 @@ body {
   color: white;
   font-size: 14px;
   border-radius: 4px;
-  background-color: #0F141D;
+  background-color: #101727;
   border: 1px solid #747981;
   border-right: none;
   padding-right: 0px;
@@ -260,7 +261,7 @@ body {
 }
 
 .container-fluid .main form button[type=submit] {
-  background-color: #0F141D;
+  background-color: #101727;
   width: 35px;
   height: 35px;
   color: #747981;
@@ -327,7 +328,7 @@ body {
   color: white;
   font-size: 14px;
   border-radius: 4px;
-  background-color: #0F141D;
+  background-color: #101727;
   border: 1px solid #747981;
 }
 
@@ -337,12 +338,12 @@ body {
   color: white;
   font-size: 14px;
   border-radius: 4px;
-  background-color: #0F141D;
+  background-color: #101727;
   border: 1px solid #747981;
 }
 
 .container-fluid .main .filter-section form button[type=submit] {
-  background-color: #0F141D;
+  background-color: #101727;
   width: 250px;
   height: 35px;
   color: #747981;
@@ -352,7 +353,7 @@ body {
 }
 
 .container-fluid .main .filter-section .list-group {
-  background-color: #0F141D;
+  background-color: #101727;
   color: white;
 }
 
@@ -361,7 +362,7 @@ body {
 }
 
 .container-fluid .main .filter-section .list-group .list-group-item-light {
-  background-color: #0F141D;
+  background-color: #101727;
   color: white;
 }
 
@@ -607,19 +608,23 @@ table {
 }
 
 td, th {
-  border: 1px solid #dddddd;
+  border: 1px solid #213E68;
   text-align: left;
   padding: 8px;
   min-width: 100px;
 }
 
+th {
+  color: white !important;
+}
+
 tr:nth-child(even) {
-  color: white;
-  background-color: #0F141D;
+  color: #848689;
+  background-color: #101727;
 }
 
 tr:nth-child(odd) {
-  color: white;
-  background-color: #0F141D;
+  color: #848689;
+  background-color: #101727;
 }
 /*# sourceMappingURL=index.css.map */

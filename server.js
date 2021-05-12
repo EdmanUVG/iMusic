@@ -125,6 +125,10 @@ app.get('/users/udpatealbum', (req, res) => {
     res.render("udpatealbum");
 });
 
+app.get('/users/updatetomonitor', (req, res) => {
+    res.render("updatetomonitor");
+});
+
 app.get('/users/updatetrack', (req, res) => {
     res.render("updatetrack");
 });
@@ -222,9 +226,95 @@ app.get('/users/bitacora', (req, res) => {
     }
 });
 
+app.get('/users/reproduccionesporsemana', (req, res) => {
+    try {
+        pool.connect(async (error, client, release) => {
+            let resp = await client.query (`SELECT * FROM REPRODUCCIONES_SEMANALES('2019-05-01','2022-05-01');`);
+
+            res.render('reproduccionesporsemana', {user: req.user.nombre, email: req.user.correo,
+            subscription: req.user.codigo_suscripcion, userRole: req.user.codigo_tipo_usuario, 
+            fechaSemanaUno: resp.rows[0]["fecha_semana"],
+            totalUno: resp.rows[0]["total"],
+            fechaSemanaDos: resp.rows[1]["fecha_semana"],
+            totalDos: resp.rows[1]["total"],
+            fechaSemanaTres: resp.rows[2]["fecha_semana"],
+            totalTres: resp.rows[2]["total"],
+            fechaSemanaCuatro: resp.rows[3]["fecha_semana"],
+            totalCuatro: resp.rows[3]["total"],
+            totalTres: resp.rows[2]["total"],
+            fechaSemanaCinco: resp.rows[4]["fecha_semana"],
+            totalCinco: resp.rows[4]["total"]});
+        })
+    } catch(error) {
+        console.log(error);
+    }
+});
+
+app.get('/users/artistasreproducciones', (req, res) => {
+    try {
+        pool.connect(async (error, client, release) => {
+            let resp = await client.query (`SELECT*FROM artista_top('2019-05-01','2022-05-01',2);`);
+
+            res.render('artistasreproducciones', {user: req.user.nombre, email: req.user.correo,
+            subscription: req.user.codigo_suscripcion, userRole: req.user.codigo_tipo_usuario, 
+            artistaUno: resp.rows[0]["artista"],
+            totalUno: resp.rows[0]["total_reproducciones"],
+            artistaDos: resp.rows[1]["artista"],
+            totalDos: resp.rows[1]["total_reproducciones"]});
+        })
+    } catch(error) {
+        console.log(error);
+    }
+});
+
+app.get('/users/reproduccionesporgenero', (req, res) => {
+    try {
+        pool.connect(async (error, client, release) => {
+            let resp = await client.query (`SELECT*FROM TOP_GENERO('2019-05-01','2022-05-01');`);
+
+            res.render('reproduccionesporgenero', {user: req.user.nombre, email: req.user.correo,
+            subscription: req.user.codigo_suscripcion, userRole: req.user.codigo_tipo_usuario, 
+            generoUno: resp.rows[0]["genero"],
+            totalUno: resp.rows[0]["total"],
+            generoDos: resp.rows[1]["genero"],
+            totalDos: resp.rows[1]["total"]});
+        })
+    } catch(error) {
+        console.log(error);
+    }
+});
+
+app.get('/users/cancionesreproducciones', (req, res) => {
+    try {
+        pool.connect(async (error, client, release) => {
+            let resp = await client.query (`SELECT*FROM TOP_CANCIONES_ARTISTA('Olivia Rodrigo');`);
+
+            res.render('cancionesreproducciones', {user: req.user.nombre, email: req.user.correo,
+            subscription: req.user.codigo_suscripcion, userRole: req.user.codigo_tipo_usuario, 
+            cancionUno: resp.rows[0]["cancion_artista"],
+            totalUno: resp.rows[0]["total"],
+            cancionDos: resp.rows[1]["cancion_artista"],
+            totalDos: resp.rows[1]["total"]});
+        })
+    } catch(error) {
+        console.log(error);
+    }
+});
+
 
 app.get('/users/reportes', (req, res) => {
-    res.render('reportes');
+    try {
+        pool.connect(async (error, client, release) => {
+            let resp = await client.query (`SELECT * FROM COMISIONES_ARTISTA('Olivia Rodrigo');`);
+
+            res.render('reportes', {user: req.user.nombre, email: req.user.correo,
+            subscription: req.user.codigo_suscripcion, userRole: req.user.codigo_tipo_usuario, 
+            cancionUno: resp.rows[0]["cancion_artista"],
+            pagoUno: resp.rows[0]["pago"]});
+        })
+    } catch(error) {
+        console.log(error);
+    }
 });
 
 app.get('/users/agregarnombreartista', (req, res) => {
@@ -395,6 +485,27 @@ app.post('/users/udpatealbum', async(req, res) => {
                         throw err;
                     }
                     req.flash("success_msg", "¡Álbum fue actualizada exitosamente!");
+                    res.redirect('/users/dashboard');
+                }   
+            );
+        })
+    } catch(error) {
+        console.log(error);
+    }
+});
+
+app.post('/users/updatetomonitor', async(req, res) => {
+
+    let { nombre, nuevo } = req.body;
+
+    try {
+        pool.connect(async (error, client, release) => {
+            await client.query(`UPDATE usuarios SET codigo_tipo_usuario = $1 WHERE correo = $2`, [nuevo, nombre],
+                (err) => {
+                    if (err){
+                        throw err;
+                    }
+                    req.flash("success_msg", "Usuario fue actualizada exitosamente!");
                     res.redirect('/users/dashboard');
                 }   
             );

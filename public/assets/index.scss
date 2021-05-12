@@ -17,8 +17,8 @@ body {
     background-color: #0F141D;
 
     .main {
-        background-color: $primaryBackground;
-        // height: calc(100vh - 100px);
+        background-color: #0C1221;
+        height: calc(100vh - 100px);
 
         form {
             margin-top: 15px;
@@ -378,19 +378,23 @@ table {
   }
 
   td, th {
-    border: 1px solid #dddddd;
+    border: 1px solid #213E68;
     text-align: left;
     padding: 8px;
     min-width: 100px;
   }
+
+  th {
+      color: white !important;
+  }
   
   tr:nth-child(even) {
-    color: white;
+    color:#848689;
     background-color: $primaryBackground;
   }
 
   tr:nth-child(odd) {
-    color: white;
+    color: #848689;
     background-color:$primaryBackground;
   }
 

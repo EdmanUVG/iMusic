@@ -19,7 +19,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="sidebar col-2">
-                <a href="/users/dashboard" style="color: white;"><i class="fas fa-home"></i> Home</a>
+                <a href="/users/dashboard" style="color: #04A0C0;"><i class="fas fa-home"></i> Home</a>
 
                 <% if(userRole == 0){ %>
                 <a href="/users/actualizar"><i class="far fa-user"></i> Soy artista</a>
@@ -192,6 +192,7 @@
                                         usuario</a></button>
                             </div>
                             <% } %>
+                            <% if(userRole == 2 ) { %>
                             <div class="col-md-6" style="background-color: #0F141D;">
                                 <br />
                                 <br />
@@ -203,8 +204,9 @@
                                 <br />
                                 <br />
                                 <p><b>Asociar un usuario existente a un perfil de monitoreo </b></p>
-                                <button id="getButton"><a href="/users/udpatealbum">Modificar</a></button>
+                                <button id="getButton"><a href="/users/updatetomonitor">Modificar</a></button>
                             </div>
+                            <% } %>
                             <div class="col-md-6" style="background-color: #0F141D;">
                                 <br />
                                 <br />
@@ -229,18 +231,21 @@
                             <div class="col-md-6" style="background-color: #0F141D;">
                                 <br />
                                 <p><b> Total de reproducciones por semana </b></p>
-                                <button id="retrieveButton"><a href="/users/reportes">Obtener reporte</a></button>
+                                <button id="retrieveButton"><a href="/users/reproduccionesporsemana">Obtener
+                                        reporte</a></button>
                             </div>
                             <div class="col-md-6" style="background-color: #0F141D;">
                                 <br />
                                 <p><b> Los N artistas con las mayores reproducciones </b></p>
-                                <button id="retrieveButton"><a href="/users/udpatealbum">Obtener reporte</a></button>
+                                <button id="retrieveButton"><a href="/users/artistasreproducciones">Obtener
+                                        reporte</a></button>
                             </div>
                             <div class="col-md-6" style="background-color: #0F141D;">
                                 <br />
                                 <br />
                                 <p><b> Total de reproducciones por género </b></p>
-                                <button id="retrieveButton"><a href="/users/reportes">Obtener reporte</a></button>
+                                <button id="retrieveButton"><a href="/users/reproduccionesporgenero">Obtener
+                                        reporte</a></button>
                                 <br />
                                 <br />
                                 <br />
@@ -252,7 +257,8 @@
                                 <br />
                                 <br />
                                 <p><b> Las N canciones con más reproducciones para un artista </b></p>
-                                <button id="retrieveButton"><a href="/users/udpatealbum">Obtener reporte</a></button>
+                                <button id="retrieveButton"><a href="/users/cancionesreproducciones">Obtener
+                                        reporte</a></button>
                                 <br />
                                 <br />
                                 <br />
