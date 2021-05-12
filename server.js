@@ -141,6 +141,10 @@ app.get('/users/deactivateuserwithoutsubscription', (req, res) => {
     res.render("deactivateuserwithoutsubscription");
 });
 
+app.get('/users/deactivatesubscription', (req, res) => {
+    res.render("deactivatesubscription");
+});
+
 app.get('/users/deactivatetrack', (req, res) => {
     res.render("deactivatetrack");
 });
@@ -219,7 +223,35 @@ app.get('/users/bitacora', (req, res) => {
             accionSiete: resp.rows[6]["accion"],
             usuarioSiete: resp.rows[6]["usuario"],
             datoAntesSiete: resp.rows[6]["dato_antes"],
-            datoDespuesSiete: resp.rows[6]["dato_despues"]});
+            datoDespuesSiete: resp.rows[6]["dato_despues"],
+            fechaOcho: resp.rows[7]["fecha_hora_bitacora"],
+            tablaOcho: resp.rows[7]["tabla"],
+            columnaOcho: resp.rows[7]["columna"],
+            accionOcho: resp.rows[7]["accion"],
+            usuarioOcho: resp.rows[7]["usuario"],
+            datoAntesOcho: resp.rows[7]["dato_antes"],
+            datoDespuesOcho: resp.rows[7]["dato_despues"],
+            fechaNueve: resp.rows[8]["fecha_hora_bitacora"],
+            tablaNueve: resp.rows[8]["tabla"],
+            columnaNueve: resp.rows[8]["columna"],
+            accionNueve: resp.rows[8]["accion"],
+            usuarioNueve: resp.rows[8]["usuario"],
+            datoAntesNueve: resp.rows[8]["dato_antes"],
+            datoDespuesNueve: resp.rows[8]["dato_despues"],
+            fechaDiez: resp.rows[9]["fecha_hora_bitacora"],
+            tablaDiez: resp.rows[9]["tabla"],
+            columnaDiez: resp.rows[9]["columna"],
+            accionDiez: resp.rows[9]["accion"],
+            usuarioDiez: resp.rows[9]["usuario"],
+            datoAntesDiez: resp.rows[9]["dato_antes"],
+            datoDespuesDiez: resp.rows[9]["dato_despues"],
+            fechaOnce: resp.rows[10]["fecha_hora_bitacora"],
+            tablaOnce: resp.rows[10]["tabla"],
+            columnaOnce: resp.rows[10]["columna"],
+            accionOnce: resp.rows[10]["accion"],
+            usuarioOnce: resp.rows[10]["usuario"],
+            datoAntesOnce: resp.rows[10]["dato_antes"],
+            datoDespuesOnce: resp.rows[10]["dato_despues"]});
         })
     } catch(error) {
         console.log(error);
@@ -251,9 +283,11 @@ app.get('/users/reproduccionesporsemana', (req, res) => {
 });
 
 app.get('/users/artistasreproducciones', (req, res) => {
+
+    let { fechaInicio, fechaFinal, limite } = req.body;
     try {
         pool.connect(async (error, client, release) => {
-            let resp = await client.query (`SELECT*FROM artista_top('2019-05-01','2022-05-01',2);`);
+            let resp = await client.query (`SELECT * FROM artista_top($1, $2, $3);`, ['2019-05-01', '2022-05-01', 2]);
 
             res.render('artistasreproducciones', {user: req.user.nombre, email: req.user.correo,
             subscription: req.user.codigo_suscripcion, userRole: req.user.codigo_tipo_usuario, 
@@ -285,16 +319,16 @@ app.get('/users/reproduccionesporgenero', (req, res) => {
 });
 
 app.get('/users/cancionesreproducciones', (req, res) => {
+
+    let { fechaInicio, fechaFinal, limite } = req.body;
     try {
         pool.connect(async (error, client, release) => {
-            let resp = await client.query (`SELECT*FROM TOP_CANCIONES_ARTISTA('Olivia Rodrigo');`);
+            let resp = await client.query (`SELECT * FROM TOP_CANCIONES_ARTISTA($1);`, ['Olivia Rodrigo']);
 
             res.render('cancionesreproducciones', {user: req.user.nombre, email: req.user.correo,
             subscription: req.user.codigo_suscripcion, userRole: req.user.codigo_tipo_usuario, 
             cancionUno: resp.rows[0]["cancion_artista"],
-            totalUno: resp.rows[0]["total"],
-            cancionDos: resp.rows[1]["cancion_artista"],
-            totalDos: resp.rows[1]["total"]});
+            totalUno: resp.rows[0]["total"]});
         })
     } catch(error) {
         console.log(error);
@@ -494,6 +528,7 @@ app.post('/users/udpatealbum', async(req, res) => {
     }
 });
 
+
 app.post('/users/updatetomonitor', async(req, res) => {
 
     let { nombre, nuevo } = req.body;
@@ -585,12 +620,63 @@ app.post('/users/deactivateuserwithoutsubscription', async(req, res) => {
 
     try {
         pool.connect(async (error, client, release) => {
-            // let resp = await client.query(`UPDATE usuarios SET codigo_tipo_usuario = $1 WHERE correo = $2 AND codigo_suscripcion = $3`, [111, nombre, 0]);
+            let resp = await client.query(`UPDATE usuarios SET codigo_tipo_usuario = $1 WHERE (correo = $2 and codigo_suscripcion = $3)`, [99, nombre, 0]);
   
-            let resp = await client.query(`SELECT * FROM usuarios`);
+            // let resp = await client.query(`SELECT * FROM usuarios`);
+            console.log(resp.rowCount)
 
-            if (resp === "" || resp === null) {
-                req.flash("error_msg", "¡El usuario no esta en la base de datos!");
+            if (resp.rowCount === 0) {
+                req.flash("error_msg", "¡El usuario posee una suscripción activa!");
+                res.redirect('/users/dashboard');
+            } else {
+                req.flash("success_msg", "¡El usuario fue desactivada exitosamente!");
+                res.redirect('/users/dashboard');
+            }
+        })
+    } catch(error) {
+        console.log(error);
+    }
+});
+
+app.post('/users/deactivatesubscription', async(req, res) => {
+
+    let { nombre } = req.body;
+
+    try {
+        pool.connect(async (error, client, release) => {
+            let resp = await client.query(`UPDATE usuarios SET codigo_suscripcion = $1 where (correo = $2 
+            AND codigo_tipo_usuario != 2 AND codigo_tipo_usuario != 3 AND codigo_tipo_usuario != 4 AND codigo_tipo_usuario != 3 
+            AND codigo_tipo_usuario != 99)
+            `, [0, nombre]);
+  
+            // let resp = await client.query(`SELECT * FROM usuarios`);
+            console.log(resp.rowCount)
+
+            if (resp.rowCount === 0) {
+                req.flash("error_msg", "¡El usuario posee provilegios");
+                res.redirect('/users/dashboard');
+            } else {
+                req.flash("success_msg", "¡La suscripción fue eliminada exitosamente!");
+                res.redirect('/users/dashboard');
+            }
+        })
+    } catch(error) {
+        console.log(error);
+    }
+});
+
+app.post('/users/deactivateuserartist', async(req, res) => {
+
+    let { nombre } = req.body;
+
+    try {
+        pool.connect(async (error, client, release) => {
+            let resp = await client.query(`UPDATE usuarios SET codigo_tipo_usuario = $1 WHERE (correo = $2 and codigo_tipo_usuario = $3)`, [99, nombre, 1]);
+  
+            console.log(resp.rowCount)
+
+            if (resp.rowCount === 0) {
+                req.flash("error_msg", "¡El usuario no es artista!");
                 res.redirect('/users/dashboard');
             } else {
                 req.flash("success_msg", "¡El usuario fue desactivada exitosamente!");

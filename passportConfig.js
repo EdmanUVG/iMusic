@@ -8,8 +8,8 @@ function initialize(passport) {
   const authenticateUser = (email, password, done) => {
     console.log(email, password);
     pool.query(
-      `SELECT * FROM usuarios WHERE correo = $1`,
-      [email],
+      `SELECT * FROM usuarios WHERE(correo = $1 and codigo_tipo_usuario != $2)`,
+      [email, 99],
       (err, results) => {
         if (err) {
           throw err;
@@ -33,7 +33,7 @@ function initialize(passport) {
         } else {
           // No user
           return done(null, false, {
-            message: "No user with that email address"
+            message: "No existe usuario con tal correo"
           });
         }
       }

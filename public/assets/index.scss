@@ -372,12 +372,18 @@ body {
 
 
 table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
     width: 100%;
-  }
+}
 
-  td, th {
+#col-fecha {
+    width: 200px !important;
+}
+
+th:first-child {
+    width: 30px !important;
+}
+
+td, th {
     border: 1px solid #213E68;
     text-align: left;
     padding: 8px;

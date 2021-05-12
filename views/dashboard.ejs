@@ -187,7 +187,7 @@
                             <div class="col-md-6" style="background-color: #0F141D;">
                                 <br />
                                 <br />
-                                <p><b>Desactivar usuarios registrados como artistas </b></p>
+                                <p><b>Desactivar usuario registrado como artista </b></p>
                                 <button id="deleteButton"><a href="/users/deactivateuserartist">Desactivar
                                         usuario</a></button>
                             </div>
@@ -196,9 +196,8 @@
                             <div class="col-md-6" style="background-color: #0F141D;">
                                 <br />
                                 <br />
-                                <p><b>Eliminar suscipciones de usuarios </b></p>
-                                <button id="getButton"><a
-                                        href="/users/deactivateuserwithoutsubscription">Modificar</a></button>
+                                <p><b>Eliminar suscipciones de usuario </b></p>
+                                <button id="getButton"><a href="/users/deactivatesubscription">Modificar</a></button>
                             </div>
                             <div class="col-md-6" style="background-color: #0F141D;">
                                 <br />
@@ -237,7 +236,8 @@
                             <div class="col-md-6" style="background-color: #0F141D;">
                                 <br />
                                 <p><b> Los N artistas con las mayores reproducciones </b></p>
-                                <button id="retrieveButton"><a href="/users/artistasreproducciones">Obtener
+                                <button id="retrieveButton"><a href="#" data-bs-toggle="modal"
+                                        data-bs-target="#getReproduccionesModal">Obtener
                                         reporte</a></button>
                             </div>
                             <div class="col-md-6" style="background-color: #0F141D;">
@@ -257,7 +257,8 @@
                                 <br />
                                 <br />
                                 <p><b> Las N canciones con más reproducciones para un artista </b></p>
-                                <button id="retrieveButton"><a href="/users/cancionesreproducciones">Obtener
+                                <button id="retrieveButton"><a href="#" data-bs-toggle="modal"
+                                        data-bs-target="#getCancionesModal">Obtener
                                         reporte</a></button>
                                 <br />
                                 <br />
@@ -386,6 +387,59 @@
                             <% } %>
 
                             <button id="logout-btn"><a href="/users/logout">Logout</a></button><br /><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="getReproduccionesModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        data-show="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="title col-12">
+                            <img src="/public/assets/logo.jpg" height="40" width="40" alt="">
+                            <h4>iMusic</h4>
+                        </div>
+                        <div class="login-to-continue col-12">
+                            <p>Ingresar datos </p>
+                        </div>
+                        <div class="col-12">
+                            <form action="/users/artistasreproducciones" method="GET">
+                                <input type="text" id="fechaInicio" name="fechaInicio" placeholder="Fecha inicio"><br>
+                                <input type="text" id="fechaFinal" name="fechaFinal" placeholder="Fecha final"><br>
+                                <input type="text" id="limite" name="limite" placeholder="Limite" autofocus><br>
+                                <input type="submit" value="Obtener">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="getCancionesModal" tabindex="-1" aria-labelledby="exampleModalLabel" data-show="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="title col-12">
+                            <img src="/public/assets/logo.jpg" height="40" width="40" alt="">
+                            <h4>iMusic</h4>
+                        </div>
+                        <div class="login-to-continue col-12">
+                            <p>Ingresar datos </p>
+                        </div>
+                        <div class="col-12">
+                            <form action="/users/cancionesreproducciones" method="GET">
+                                <input type="text" id="nombre" name="nombre" placeholder="Nombre de artista"><br>
+                                <input type="submit" value="Obtener">
+                            </form>
                         </div>
                     </div>
                 </div>

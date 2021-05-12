@@ -59,15 +59,12 @@
                             <h4>iMusic</h4>
                         </div>
                         <div class="login-to-continue col-12">
-                            <p>Ingresar usuario </p>
+                            <p>Ingresar usuario a remover suscripciones: </p>
                         </div>
                         <div class="col-12">
-                            <form action="/users/updatetomonitor" method="POST">
-                                <input type="text" id="nombre" name="nombre" placeholder="Correo de usuario"
-                                    autofocus><br>
-                                <input type="text" id="nuevo" name="nuevo" placeholder="Codigo de usuario"
-                                    autofocus><br>
-                                <input type="submit" value="Modificar">
+                            <form action="/users/deactivatesubscription" method="POST">
+                                <input type="text" id="nombre" name="nombre" placeholder="Correo" autofocus><br>
+                                <input type="submit" value="Desactivar">
                             </form>
                         </div>
                     </div>
