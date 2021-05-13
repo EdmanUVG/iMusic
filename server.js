@@ -810,7 +810,7 @@ app.post('/users/register', async (req, res) => {
                    pool.query(
                         `INSERT INTO usuarios (id, correo, codigo_suscripcion, codigo_tipo_usuario, contrasena, nombre,
                             cantidad_veces_logeado, cantidad_canciones_usuarios)
-                        VALUES (33, $1, $2, $3, $4, $5, $6, $7)
+                        VALUES (40, $1, $2, $3, $4, $5, $6, $7)
                         RETURNING id, contrasena`,
                         [email, 0, 0, hashedPassword, name, 1, 0],
                         (err, result) => {
