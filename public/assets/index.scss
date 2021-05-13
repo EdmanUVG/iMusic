@@ -8,16 +8,15 @@
 
 body {
     font-family: "Roboto", sans-serif;
-    // background-color: #2C2C31;
-    background-color:  $primaryBackground;
+    background-color:  $primaryBackground !important;
   }
 
 .container-fluid {
-    // height: 100vh;
-    background-color: #0F141D;
+    background-color: $secondaryBackground !important;
 
     .main {
-        background-color: #0C1221;
+        // background-color: #0C1221;
+        background-color: $secondaryBackground !important;
         height: calc(100vh - 100px);
 
         form {
@@ -120,6 +119,7 @@ body {
 
         .filter-section {
             form {
+                padding-left: 20px;
                 #select_genre {
                     width: 285px;
                     height: 35px;
@@ -144,6 +144,8 @@ body {
                     background-color: $primaryBackground;
                     width: 250px;
                     height: 35px;
+                    margin-top: 20px;
+                    margin-bottom: 10px;
                     color: $primaryTextColor;
                     border: 1px solid $primaryTextColor;
                     margin-left: 0px;
@@ -291,13 +293,14 @@ body {
     .music-player {
         height: 70px;
         display: flex;
-        background-color: $secondaryBackground;
+        background-color: $primaryBackground;
 
         .col-4 {
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: row;
+            background-color: $primaryBackground;
         }
 
         .far {
@@ -311,7 +314,7 @@ body {
 
         .fas {
             color: $progressBackground;
-            font-size: 15px;
+            font-size: 20px;
             margin: 0px 25px;
 
             &:hover {
@@ -330,16 +333,17 @@ body {
         margin: auto;
         justify-content: center;
         padding-top: 5px;
-        background-color: $secondaryBackground;
+        background-color: $primaryBackground !important;
 
         .progress {
             width: 80vw;
-            height: 6px;
+            height: 3px;
             background-color: $progressBackground;
             border-radius: 20px;
 
             .progress-bar {
                 border-radius: 10px;
+                background-color: #00E0FF !important;
             }
         }
     }

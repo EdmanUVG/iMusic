@@ -204,15 +204,15 @@
 
 body {
   font-family: "Roboto", sans-serif;
-  background-color: #101727;
+  background-color: #101727 !important;
 }
 
 .container-fluid {
-  background-color: #0F141D;
+  background-color: #0C1221 !important;
 }
 
 .container-fluid .main {
-  background-color: #0C1221;
+  background-color: #0C1221 !important;
   height: calc(100vh - 100px);
 }
 
@@ -322,6 +322,10 @@ body {
   color: white !important;
 }
 
+.container-fluid .main .filter-section form {
+  padding-left: 20px;
+}
+
 .container-fluid .main .filter-section form #select_genre {
   width: 285px;
   height: 35px;
@@ -346,6 +350,8 @@ body {
   background-color: #101727;
   width: 250px;
   height: 35px;
+  margin-top: 20px;
+  margin-bottom: 10px;
   color: #747981;
   border: 1px solid #747981;
   margin-left: 0px;
@@ -502,7 +508,7 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background-color: #0F141D;
+  background-color: #101727;
 }
 
 .container-fluid .music-player .col-4 {
@@ -519,6 +525,7 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  background-color: #101727;
 }
 
 .container-fluid .music-player .far {
@@ -531,8 +538,8 @@ body {
 }
 
 .container-fluid .music-player .fas {
-  color: #5F656D;
-  font-size: 15px;
+  color: #3F3F4F;
+  font-size: 20px;
   margin: 0px 25px;
 }
 
@@ -554,18 +561,19 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   padding-top: 5px;
-  background-color: #0F141D;
+  background-color: #101727 !important;
 }
 
 .container-fluid .music-progress .progress {
   width: 80vw;
-  height: 6px;
-  background-color: #5F656D;
+  height: 3px;
+  background-color: #3F3F4F;
   border-radius: 20px;
 }
 
 .container-fluid .music-progress .progress .progress-bar {
   border-radius: 10px;
+  background-color: #00E0FF !important;
 }
 
 .profile-container {

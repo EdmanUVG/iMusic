@@ -209,8 +209,9 @@
                             <div class="col-md-6" style="background-color: #0F141D;">
                                 <br />
                                 <br />
-                                <p><b> Generar los reportes ofrecidos por la plataforma </b></p>
-                                <button id="getButton"><a href="/users/reportes">Obtener reporte</a></button>
+                                <p><b> Comisiones del artista </b></p>
+                                <button id="getButton"><a href="#" data-bs-toggle="modal"
+                                        data-bs-target="#getComisionesModal">Obtener reporte</a></button>
                             </div>
                             <div class="col-md-6" style="background-color: #0F141D;">
                                 <br />
@@ -230,7 +231,8 @@
                             <div class="col-md-6" style="background-color: #0F141D;">
                                 <br />
                                 <p><b> Total de reproducciones por semana </b></p>
-                                <button id="retrieveButton"><a href="/users/reproduccionesporsemana">Obtener
+                                <button id="retrieveButton"><a href="#" data-bs-toggle="modal"
+                                        data-bs-target="#getSemanalModal">Obtener
                                         reporte</a></button>
                             </div>
                             <div class="col-md-6" style="background-color: #0F141D;">
@@ -244,7 +246,8 @@
                                 <br />
                                 <br />
                                 <p><b> Total de reproducciones por género </b></p>
-                                <button id="retrieveButton"><a href="/users/reproduccionesporgenero">Obtener
+                                <button id="retrieveButton"><a href="#" data-bs-toggle="modal"
+                                        data-bs-target="#getGeneroModal">Obtener
                                         reporte</a></button>
                                 <br />
                                 <br />
@@ -272,7 +275,7 @@
                     <% } %>
 
                     <% if(userRole == 0 || userRole == 1 ) { %>
-                    <div class="container filter-section">
+                    <div class="col-sm-12 col-md-12 filter-section">
                         <form action="">
                             <input type="hidden" id='hidden_token'>
                             <div class="col-sm-6 form-group row mt-4 px-0">
@@ -409,10 +412,13 @@
                             <p>Ingresar datos </p>
                         </div>
                         <div class="col-12">
-                            <form action="/users/artistasreproducciones" method="GET">
+                            <form action="/users/artistasreproducciones" method="POST">
                                 <input type="text" id="fechaInicio" name="fechaInicio" placeholder="Fecha inicio"><br>
                                 <input type="text" id="fechaFinal" name="fechaFinal" placeholder="Fecha final"><br>
                                 <input type="text" id="limite" name="limite" placeholder="Limite" autofocus><br>
+                                <input type="submit" value="Validar Primero">
+                            </form>
+                            <form action="/users/artistasreproducciones" method="GET">
                                 <input type="submit" value="Obtener">
                             </form>
                         </div>
@@ -436,9 +442,98 @@
                             <p>Ingresar datos </p>
                         </div>
                         <div class="col-12">
-                            <form action="/users/cancionesreproducciones" method="GET">
+                            <form action="/users/cancionesreproducciones" method="POST" id="valor">
                                 <input type="text" id="nombre" name="nombre" placeholder="Nombre de artista"><br>
-                                <input type="submit" value="Obtener">
+                                <input type="submit" value="Validar Primero">
+                            </form>
+                            <form action="/users/cancionesreproducciones" method="GET">
+                                <input type="submit" value="Obtener datos">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="getSemanalModal" tabindex="-1" aria-labelledby="exampleModalLabel" data-show="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="title col-12">
+                            <img src="/public/assets/logo.jpg" height="40" width="40" alt="">
+                            <h4>iMusic</h4>
+                        </div>
+                        <div class="login-to-continue col-12">
+                            <p>Ingresar datos </p>
+                        </div>
+                        <div class="col-12">
+                            <form action="/users/reportes" method="POST">
+                                <input type="text" id="fechaInicio" name="fechaInicio" placeholder="Fecha inicio"><br>
+                                <input type="text" id="fechaFinal" name="fechaFinal" placeholder="Fecha final"><br>
+                                <input type="submit" value="Validar Primero">
+                            </form>
+                            <form action="/users/reportes" method="GET">
+                                <input type="submit" value="Obtener datos">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="getGeneroModal" tabindex="-1" aria-labelledby="exampleModalLabel" data-show="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="title col-12">
+                            <img src="/public/assets/logo.jpg" height="40" width="40" alt="">
+                            <h4>iMusic</h4>
+                        </div>
+                        <div class="login-to-continue col-12">
+                            <p>Ingresar datos </p>
+                        </div>
+                        <div class="col-12">
+                            <form action="/users/reproduccionesporgenero" method="POST">
+                                <input type="text" id="fechaInicio" name="fechaInicio" placeholder="Fecha inicio"><br>
+                                <input type="text" id="fechaFinal" name="fechaFinal" placeholder="Fecha final"><br>
+                                <input type="submit" value="Validar Primero">
+                            </form>
+                            <form action="/users/reproduccionesporgenero" method="GET">
+                                <input type="submit" value="Obtener datos">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="getComisionesModal" tabindex="-1" aria-labelledby="exampleModalLabel" data-show="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="title col-12">
+                            <img src="/public/assets/logo.jpg" height="40" width="40" alt="">
+                            <h4>iMusic</h4>
+                        </div>
+                        <div class="login-to-continue col-12">
+                            <p>Ingresar datos </p>
+                        </div>
+                        <div class="col-12">
+                            <form action="/users/reportes" method="POST">
+                                <input type="text" id="nombre" name="nombre" placeholder="Nombre del artista"><br>
+                                <input type="submit" value="Validar Primero">
+                            </form>
+                            <form action="/users/reportes" method="GET">
+                                <input type="submit" value="Obtener datos">
                             </form>
                         </div>
                     </div>

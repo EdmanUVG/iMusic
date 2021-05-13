@@ -5,6 +5,8 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const flash = require('express-flash');
 const passport = require('passport');
+// const jsdom = require("jsdom");
+// const { JSDOM } = jsdom;
 
 const PORT = process.env.PORT || 4000;
 
@@ -14,6 +16,17 @@ initializePassport(passport);
 
 app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
+
+var nombreArtista = "";
+var fechaInicialSemana = "";
+var fechaFinalSemana = "";
+var fechaInicialSemanaGenero = "";
+var fechaFinalSemanaGenero = "";
+var fechaInicialSemanaArtista = "";
+var fechaFinalSemanaArtista = "";
+var limiteArtista = 1;
+var nombreArtistaComision = "";
+
 
 
 app.use(
@@ -261,7 +274,7 @@ app.get('/users/bitacora', (req, res) => {
 app.get('/users/reproduccionesporsemana', (req, res) => {
     try {
         pool.connect(async (error, client, release) => {
-            let resp = await client.query (`SELECT * FROM REPRODUCCIONES_SEMANALES('2019-05-01','2022-05-01');`);
+            let resp = await client.query (`SELECT * FROM REPRODUCCIONES_SEMANALES($1, $2);`, [fechaInicialSemana.fechaInicio, fechaFinalSemana.fechaFinal]);
 
             res.render('reproduccionesporsemana', {user: req.user.nombre, email: req.user.correo,
             subscription: req.user.codigo_suscripcion, userRole: req.user.codigo_tipo_usuario, 
@@ -284,10 +297,9 @@ app.get('/users/reproduccionesporsemana', (req, res) => {
 
 app.get('/users/artistasreproducciones', (req, res) => {
 
-    let { fechaInicio, fechaFinal, limite } = req.body;
     try {
         pool.connect(async (error, client, release) => {
-            let resp = await client.query (`SELECT * FROM artista_top($1, $2, $3);`, ['2019-05-01', '2022-05-01', 2]);
+            let resp = await client.query (`SELECT * FROM artista_top($1, $2, $3);`, [fechaInicialSemanaArtista.fechaInicio, fechaFinalSemanaArtista.fechaFinal, parseInt(limiteArtista.limite)]);
 
             res.render('artistasreproducciones', {user: req.user.nombre, email: req.user.correo,
             subscription: req.user.codigo_suscripcion, userRole: req.user.codigo_tipo_usuario, 
@@ -304,7 +316,7 @@ app.get('/users/artistasreproducciones', (req, res) => {
 app.get('/users/reproduccionesporgenero', (req, res) => {
     try {
         pool.connect(async (error, client, release) => {
-            let resp = await client.query (`SELECT*FROM TOP_GENERO('2019-05-01','2022-05-01');`);
+            let resp = await client.query (`SELECT*FROM TOP_GENERO($1, $2);`, [fechaInicialSemanaGenero.fechaInicio, fechaFinalSemanaGenero.fechaFinal]);
 
             res.render('reproduccionesporgenero', {user: req.user.nombre, email: req.user.correo,
             subscription: req.user.codigo_suscripcion, userRole: req.user.codigo_tipo_usuario, 
@@ -318,11 +330,12 @@ app.get('/users/reproduccionesporgenero', (req, res) => {
     }
 });
 
-app.get('/users/cancionesreproducciones', (req, res) => {
 
+app.get('/users/cancionesreproducciones', (req, res) => {
+    console.log(nombreArtista.nombre);
     try {
         pool.connect(async (error, client, release) => {
-            let resp = await client.query (`SELECT * FROM TOP_CANCIONES_ARTISTA('Olivia Rodrigo');`);
+            let resp = await client.query (`SELECT * FROM TOP_CANCIONES_ARTISTA($1);`, [nombreArtista.nombre]);
 
             res.render('cancionesreproducciones', {user: req.user.nombre, email: req.user.correo,
             subscription: req.user.codigo_suscripcion, userRole: req.user.codigo_tipo_usuario, 
@@ -334,11 +347,37 @@ app.get('/users/cancionesreproducciones', (req, res) => {
     }
 });
 
+app.post('/users/cancionesreproducciones', (req, res) => {
+    nombreArtista = req.body;
+});
+
+app.post('/users/reproduccionesporsemana', (req, res) => {
+    fechaInicialSemana = req.body;
+    fechaFinalSemana = req.body;
+});
+
+app.post('/users/reproduccionesporgenero', (req, res) => {
+    fechaInicialSemanaGenero = req.body;
+    fechaFinalSemanaGenero = req.body;
+});
+
+app.post('/users/reportes', (req, res) => {
+    nombreArtistaComision = req.body;
+});
+
+app.post('/users/artistasreproducciones', (req, res) => {
+    fechaInicialSemanaArtista = req.body;
+    fechaFinalSemanaArtista = req.body;
+    limiteArtista = req.body
+    console.log(fechaInicialSemanaArtista.fechaInicio);
+    console.log(fechaFinalSemanaArtista.fechaFinal);
+    console.log(limiteArtista.limite);
+});
 
 app.get('/users/reportes', (req, res) => {
     try {
         pool.connect(async (error, client, release) => {
-            let resp = await client.query (`SELECT * FROM COMISIONES_ARTISTA('Olivia Rodrigo');`);
+            let resp = await client.query (`SELECT * FROM COMISIONES_ARTISTA($1);`, [nombreArtistaComision.nombre]);
 
             res.render('reportes', {user: req.user.nombre, email: req.user.correo,
             subscription: req.user.codigo_suscripcion, userRole: req.user.codigo_tipo_usuario, 
@@ -651,6 +690,29 @@ app.post('/users/deactivateuserwithoutsubscription', async(req, res) => {
     }
 });
 
+// app.post('/users/deactivateuserwithoutsubscription', async(req, res) => {
+
+//     let { nombre } = req.body;
+
+//     try {
+//         pool.connect(async (error, client, release) => {
+//             let resp = await client.query(`UPDATE usuarios SET codigo_tipo_usuario = $1 WHERE (correo = $2 and codigo_suscripcion = $3
+//                 AND codigo_tipo_usuario != 2 AND codigo_tipo_usuario != 3 AND codigo_tipo_usuario != 4 AND codigo_tipo_usuario != 3 
+//                 AND codigo_tipo_usuario != 99)`, [99, nombre, 0]);
+
+//             if (resp.rowCount === 0) {
+//                 req.flash("error_msg", "¡El usuario posee una suscripción activa!");
+//                 res.redirect('/users/dashboard');
+//             } else {
+//                 req.flash("success_msg", "¡El usuario fue desactivada exitosamente!");
+//                 res.redirect('/users/dashboard');
+//             }
+//         })
+//     } catch(error) {
+//         console.log(error);
+//     }
+// });
+
 app.post('/users/deactivatesubscription', async(req, res) => {
 
     let { nombre } = req.body;
@@ -763,10 +825,6 @@ app.post('/users/register', async (req, res) => {
             }
         );
     }
-});
-
-app.post('/users/reportes', (req, res) => {
-    res.render('reportes');
 });
 
 app.post('/users/comisiones', (req, res) => {

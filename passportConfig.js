@@ -33,7 +33,7 @@ function initialize(passport) {
         } else {
           // No user
           return done(null, false, {
-            message: "No existe usuario con tal correo"
+            message: "Tu cuenta se encuentra actualmente desactivado"
           });
         }
       }
