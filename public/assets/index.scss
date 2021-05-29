@@ -18,6 +18,70 @@ body {
         // background-color: #0C1221;
         background-color: $secondaryBackground !important;
         height: calc(100vh - 100px);
+        margin-left: 253px;
+
+        .form-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .input-container {
+            height: 170px; 
+            background-color: #101727;
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 8px;
+            animation: bounceIn;
+            animation-duration: 1s;
+
+            h4 {
+                color: white;
+                padding-bottom: 30px;
+            }
+
+            input[type=text] {
+                width: 250px;
+                height: 35px;
+                color: white;
+                font-size: 14px;
+                background-color: $primaryBackground;
+                border: 1px solid #323C76;
+                padding-right: 0px;
+                margin-right: 0px;
+                padding-left: 10px;
+                border-radius: 0px !important;
+        
+                &:focus {
+                    border: 1px solid #323C76;
+                    outline: #323C76;
+                }
+            }
+        }
+
+        .submit-container {
+            height: 170px; 
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+
+            input[type=submit] {
+                height: 35px;
+                margin-top: 15px;
+                border-radius: 20px;
+                width: 300px !important;
+                color: white;
+                font-size: 14px;
+                outline: none;
+                border: none;
+                background: rgb(2,0,36);
+                background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,31,1) 0%, rgba(7,146,114,1) 0%, rgba(0,212,255,1) 100%);
+            }
+        }
+
 
         form {
             margin-top: 15px;
@@ -79,15 +143,16 @@ body {
             display: flex;
             flex-direction: row-reverse;
             button {
-                height: 35px;
+                height: 33px;
                 margin-top: 15px;
-                border-radius: 7px;
-                width: 120px;
+                border-radius: 20px;
+                width: 140px;
                 color: white;
-                font-size: 16px;
+                font-size: 14px;
                 outline: none;
                 border: none;
-                background-image: linear-gradient(to right, red , yellow);
+                background: rgb(2,0,36);
+                background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,31,1) 0%, rgba(7,146,114,1) 0%, rgba(0,212,255,1) 100%);
 
                 a {
                     color: white;

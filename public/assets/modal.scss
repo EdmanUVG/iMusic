@@ -1,3 +1,4 @@
+@import "./variables.scss";
 
 .modal-dialog {
     max-width: 480px !important;
@@ -5,6 +6,7 @@
     
     .modal-content {
         background: #1C1E21;
+        // background-color: $primaryBackground;
         
         
         .title {

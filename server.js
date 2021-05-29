@@ -27,7 +27,7 @@ var fechaFinalSemanaArtista = "";
 var limiteArtista = 1;
 var nombreArtistaComision = "";
 
-
+var playsDict = {};
 
 app.use(
     session({
@@ -100,6 +100,23 @@ app.get('/users/dashboard', checkNotAuthenticated, (req, res) => {
                     amountLogs: amountLog.rows[0]["correo"],
                     amountLogs2: amountLog.rows[1]["correo"],
                     amountLogs3: amountLog.rows[2]["correo"]});
+        })
+    } catch(error) {
+        console.log(error);
+    }
+});
+
+app.get('/users/simulacion', (req, res) => {
+    try {
+        pool.connect(async (error, client, release) => {
+            let resp = await client.query (
+                ` SELECT * FROM canciones`);
+   
+            res.render('simulacion', { datos: resp.rows });
+
+            for (var i = 0; i < resp.rows.length; i++) {
+                playsDict[i] = resp.rows[i];
+            }
         })
     } catch(error) {
         console.log(error);
@@ -430,6 +447,46 @@ app.post('/users/dashboard', async (req, res) => {
         }  
     )
 });
+
+app.post('/users/simulacion', async (req, res) => {
+
+    let { fecha, cantidad, veces} = req.body;
+
+    // CANTIDAD DE CANCIONES 
+    for( var i = 0; i < cantidad; i++) {
+        var reproduccion = playsDict[i];
+        var tempArray = [];
+        Object.entries(reproduccion).map(item => {
+            tempArray.push(item[1]);
+            console.log(item[1]);
+        });
+
+        // CANTIDAD DE VECES
+        for ( var v = 0; v < veces; v++) {
+            //GENERAR HORA, MINUTO Y SEGUNDOS RANDOM
+            var hours = Math.floor(Math.random() * (24 - 0)) + 0;
+            var minutes = Math.floor(Math.random() * (60 - 0)) + 0;
+            var seconds = Math.floor(Math.random() * (60 - 0)) + 0;
+
+            var fecha_reproduccion = fecha + " " + hours + ":" + minutes + ":" + seconds;
+
+            console.log("Array size" + tempArray.length);
+            pool.query(
+                `INSERT INTO reproducciones(codigo_cancion, codigo_artista, codigo_album, fecha_reproduccion, id)
+                VALUES($1, $2, $3, $4, $5)`,
+                [tempArray[0], tempArray[1], tempArray[2], fecha_reproduccion, req.user.id],
+                (err, result) => {
+                    if(err) {
+                        throw err;
+                    }
+                }
+            )
+        }
+        res.redirect('/users/simulacion');
+    }
+
+});
+
 
 app.post('/users/playlist', async(req, res) => {
     let { playlist } = req.body;
@@ -810,7 +867,7 @@ app.post('/users/register', async (req, res) => {
                    pool.query(
                         `INSERT INTO usuarios (id, correo, codigo_suscripcion, codigo_tipo_usuario, contrasena, nombre,
                             cantidad_veces_logeado, cantidad_canciones_usuarios)
-                        VALUES (40, $1, $2, $3, $4, $5, $6, $7)
+                        VALUES (41, $1, $2, $3, $4, $5, $6, $7)
                         RETURNING id, contrasena`,
                         [email, 0, 0, hashedPassword, name, 1, 0],
                         (err, result) => {

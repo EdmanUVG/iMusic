@@ -5,7 +5,30 @@
     background-color: $primaryBackground;
     height: calc(100vh - 100px);
     display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    z-index: 1;
     flex-direction: column;
+
+    .simulate-button {
+        height: 33px;
+        margin-top: 15px;
+        border-radius: 20px;
+        width: 210px !important;
+        color: white;
+        font-size: 14px;
+        outline: none;
+        border: none;
+        background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,31,1) 0%, rgba(7,146,114,1) 0%, rgba(0,212,255,1) 100%);
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+    }
 
     a {
         color: $primaryTextColor;

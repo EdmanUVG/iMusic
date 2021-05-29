@@ -171,10 +171,34 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  z-index: 1;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+.sidebar .simulate-button {
+  height: 33px;
+  margin-top: 15px;
+  border-radius: 20px;
+  width: 210px !important;
+  color: white;
+  font-size: 14px;
+  outline: none;
+  border: none;
+  background: #020024;
+  background: -webkit-gradient(linear, left top, right top, from(#020024), color-stop(0%, #09791f), color-stop(0%, #079272), to(#00d4ff));
+  background: linear-gradient(90deg, #020024 0%, #09791f 0%, #079272 0%, #00d4ff 100%);
+}
+
+.sidebar .simulate-button a {
+  color: white;
+  text-decoration: none;
 }
 
 .sidebar a {
@@ -214,6 +238,94 @@ body {
 .container-fluid .main {
   background-color: #0C1221 !important;
   height: calc(100vh - 100px);
+  margin-left: 253px;
+}
+
+.container-fluid .main .form-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.container-fluid .main .input-container {
+  height: 170px;
+  background-color: #101727;
+  margin: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 8px;
+  -webkit-animation: bounceIn;
+          animation: bounceIn;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+}
+
+.container-fluid .main .input-container h4 {
+  color: white;
+  padding-bottom: 30px;
+}
+
+.container-fluid .main .input-container input[type=text] {
+  width: 250px;
+  height: 35px;
+  color: white;
+  font-size: 14px;
+  background-color: #101727;
+  border: 1px solid #323C76;
+  padding-right: 0px;
+  margin-right: 0px;
+  padding-left: 10px;
+  border-radius: 0px !important;
+}
+
+.container-fluid .main .input-container input[type=text]:focus {
+  border: 1px solid #323C76;
+  outline: #323C76;
+}
+
+.container-fluid .main .submit-container {
+  height: 170px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container-fluid .main .submit-container input[type=submit] {
+  height: 35px;
+  margin-top: 15px;
+  border-radius: 20px;
+  width: 300px !important;
+  color: white;
+  font-size: 14px;
+  outline: none;
+  border: none;
+  background: #020024;
+  background: -webkit-gradient(linear, left top, right top, from(#020024), color-stop(0%, #09791f), color-stop(0%, #079272), to(#00d4ff));
+  background: linear-gradient(90deg, #020024 0%, #09791f 0%, #079272 0%, #00d4ff 100%);
 }
 
 .container-fluid .main form {
@@ -283,16 +395,17 @@ body {
 }
 
 .container-fluid .main .premium-button button {
-  height: 35px;
+  height: 33px;
   margin-top: 15px;
-  border-radius: 7px;
-  width: 120px;
+  border-radius: 20px;
+  width: 140px;
   color: white;
-  font-size: 16px;
+  font-size: 14px;
   outline: none;
   border: none;
-  background-image: -webkit-gradient(linear, left top, right top, from(red), to(yellow));
-  background-image: linear-gradient(to right, red, yellow);
+  background: #020024;
+  background: -webkit-gradient(linear, left top, right top, from(#020024), color-stop(0%, #09791f), color-stop(0%, #079272), to(#00d4ff));
+  background: linear-gradient(90deg, #020024 0%, #09791f 0%, #079272 0%, #00d4ff 100%);
 }
 
 .container-fluid .main .premium-button button a {
