@@ -482,9 +482,8 @@ app.post('/users/simulacion', async (req, res) => {
                 }
             )
         }
-        res.redirect('/users/simulacion');
     }
-
+    res.redirect('/users/simulacion');
 });
 
 
