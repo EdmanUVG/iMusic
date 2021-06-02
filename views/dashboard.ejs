@@ -34,6 +34,17 @@
                 <button class="simulate-button">
                     <a href="/users/simulacion">Simulaciones</a>
                 </button>
+
+                <br />
+                <br />
+                <br />
+                <button class="simulate-button">
+                    <a href="/users/recomendaciones">Recomendaciones</a>
+                </button>
+
+                <form action="/users/recomendaciones" method="POST">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
                 <% } %>
 
                 <% if(userRole == 0 || userRole == 1 ) { %>

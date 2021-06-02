@@ -39,7 +39,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12" style="display: flex; justify-content: center;">
-                        <h2 style="color: white;">Simulaciones</h2>
+                        <h2 style="color: white;">Recomendaciones</h2>
                     </div>
                     <br />
                     <br />
@@ -49,15 +49,16 @@
                             <div class="form-container" style="display: flex; flex-direction: row;">
                                 <div class="col-3 input-container">
                                     <h4>Fecha</h4>
-                                    <input type="text" id="fecha" name="fecha" placeholder="2021-05-29" autofocus>
+                                    <input type="text" id="title" name="title" placeholder="2021-05-29" autofocus>
                                 </div>
                                 <div class="col-4 input-container">
                                     <h4>Cantidad</h4>
-                                    <input type="text" id="cantidad" name="cantidad" placeholder="Número de canciones">
+                                    <input type="text" id="subtitle" name="subtitle" placeholder="Número de canciones">
                                 </div>
                                 <div class="col-3 input-container">
                                     <h4>Veces</h4>
-                                    <input type="text" id="veces" name="veces" placeholder="Número de veces">
+                                    <input type="text" id="description" name="description"
+                                        placeholder="Número de veces">
                                 </div>
                             </div>
                             <div class="col-12 submit-container">
@@ -66,6 +67,59 @@
                         </form>
                     </div>
                     <div class="col-1"></div>
+
+                    <div class="col-12">
+                        <table>
+                            <tr>
+                                <th>#</th>
+                                <th>cancion</th>
+                                <th>Artista</th>
+                                <th>Album</th>
+                                <th>Fecha</th>
+                                <th>Corrreo</th>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td><%= cancionUno %></td>
+                                <td><%= artistaUno %></td>
+                                <td><%= albumUno %></td>
+                                <td><%= fechaUno %></td>
+                                <td><%= correoUno %></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><%= cancionDos %></td>
+                                <td><%= artistaDos %></td>
+                                <td><%= albumDos %></td>
+                                <td><%= fechaDos %></td>
+                                <td><%= correoDos %></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><%= cancionTres %></td>
+                                <td><%= artistaTres %></td>
+                                <td><%= albumTres %></td>
+                                <td><%= fechaTres %></td>
+                                <td><%= correoTres %></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><%= cancionCuatro %></td>
+                                <td><%= artistaCuatro %></td>
+                                <td><%= albumCuatro %></td>
+                                <td><%= fechaCuatro %></td>
+                                <td><%= correoCuatro %></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td><%= cancionCinco %></td>
+                                <td><%= artistaCinco %></td>
+                                <td><%= albumCinco %></td>
+                                <td><%= fechaCinco %></td>
+                                <td><%= correoCinco %></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

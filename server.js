@@ -1,12 +1,17 @@
+require('./mongoose');
 const express = require('express');
+const Blog = require('./blog');
 const app = express();
 const { pool } = require('./dbConfig');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 const flash = require('express-flash');
 const passport = require('passport');
-// const jsdom = require("jsdom");
-// const { JSDOM } = jsdom;
+const router = express.Router();
+const {MongoClient} = require('mongodb');
+var assert = require('assert');
+
+var url = 'mongodb://localhost:27017/imusic'
 
 const PORT = process.env.PORT || 4000;
 
@@ -26,15 +31,18 @@ var fechaInicialSemanaArtista = "";
 var fechaFinalSemanaArtista = "";
 var limiteArtista = 1;
 var nombreArtistaComision = "";
+var cantidadUsuarios = 0;
 
 var playsDict = {};
+var recomendacionesDict = {};
 
 app.use(
     session({
         secret: "secret",
         resave: false,
         saveUninitialized: false
-    })
+    }),
+    express.json()
 );
 
 
@@ -48,6 +56,100 @@ app.use('/public', express.static('public'));
 
 app.get("/", (req, res) => {
     res.render("index");
+});
+
+// ESTE ES MONGO DB
+app.get('/users/recomendaciones', function(req, res, next) {
+
+    Blog.find({}).then((blogs) => {
+        res.render(blogs);
+    }).catch((error) => {
+        res.status(500).send(error); 
+    })
+
+    try {
+        pool.connect(async (error, client, release) => {
+            let resp = await client.query(
+                `select * from MONGODB('2021-01-05', '2021-12-12') where correo_usuario != 'cot19830@uvg.edu.gt'`);
+                    console.log(resp.rows[0]);
+            res.render('recomendaciones', {
+                cancionUno: resp.rows[0]["nombre_cancion"],
+                artistaUno: resp.rows[0]["nombre_artista"],
+                albumUno: resp.rows[0]["nombre_album"],
+                fechaUno: resp.rows[0]["fecha_reproduccion"],
+                correoUno: resp.rows[0]["correo_usuario"],
+                cancionDos: resp.rows[1]["nombre_cancion"],
+                artistaDos: resp.rows[1]["nombre_artista"],
+                albumDos: resp.rows[1]["nombre_album"],
+                fechaDos: resp.rows[1]["fecha_reproduccion"],
+                correoDos: resp.rows[1]["correo_usuario"],
+                cancionTres: resp.rows[2]["nombre_cancion"],
+                artistaTres: resp.rows[2]["nombre_artista"],
+                albumTres: resp.rows[2]["nombre_album"],
+                fechaTres: resp.rows[2]["fecha_reproduccion"],
+                correoTres: resp.rows[2]["correo_usuario"],
+                cancionCuatro: resp.rows[3]["nombre_cancion"],
+                artistaCuatro: resp.rows[3]["nombre_artista"],
+                albumCuatro: resp.rows[3]["nombre_album"],
+                fechaCuatro: resp.rows[3]["fecha_reproduccion"],
+                correoCuatro: resp.rows[3]["correo_usuario"],
+                cancionCinco: resp.rows[4]["nombre_cancion"],
+                artistaCinco: resp.rows[4]["nombre_artista"],
+                albumCinco: resp.rows[4]["nombre_album"],
+                fechaCinco: resp.rows[4]["fecha_reproduccion"],
+                correoCinco: resp.rows[4]["correo_usuario"]
+            
+            
+            })
+
+            for (var i = 0; i < resp.rows.length; i++) {
+                recomendacionesDict[i] = resp.rows[i];
+            }
+        })
+    } catch(error) {
+        console.log(error);
+    }
+
+});
+
+app.post('/users/recomendaciones', (req, res) => {
+
+    let { title, subtitle, description } = req.body;
+
+    
+
+    try {
+        pool.connect(async (error, client, release) => {
+            let resp = await client.query(`select * from MONGODB('2021-01-05', '2021-12-12') where correo_usuario != 'cot19830@uvg.edu.gt'`);
+        
+            Blog.deleteMany({}, function(err) {
+                if(err) return handleError(err);
+            })
+            
+            for (var i = 0; i < 100; i++) {
+                console.log(resp.rows[i]);
+                var tempo = {
+                    cancion: resp.rows[i]["nombre_cancion"],
+                    artista: resp.rows[i]["nombre_artista"],
+                    album: resp.rows[i]["nombre_album"],
+                    fecha: resp.rows[i]["fecha_reproduccion"],
+                    correo: resp.rows[i]["correo_usuario"]
+                };
+                Blog.create(tempo).then((blog) => {
+                    res.status(201).send(blog);
+                    
+                }).catch((error) => {
+                    res.status(400).send(error);
+                })  
+                
+                tempo = {};
+            }
+            res.render('recomendaciones');
+        })
+
+    } catch(error) {
+        console.log(error);
+    }   
 });
 
 app.get('/users/register', checkAuthenticated, (req, res) => {
@@ -113,6 +215,8 @@ app.get('/users/simulacion', (req, res) => {
                 ` SELECT * FROM canciones`);
    
             res.render('simulacion', { datos: resp.rows });
+
+            cantidadUsuarios = resp.rowCount.length;
 
             for (var i = 0; i < resp.rows.length; i++) {
                 playsDict[i] = resp.rows[i];
@@ -467,14 +571,15 @@ app.post('/users/simulacion', async (req, res) => {
             var hours = Math.floor(Math.random() * (24 - 0)) + 0;
             var minutes = Math.floor(Math.random() * (60 - 0)) + 0;
             var seconds = Math.floor(Math.random() * (60 - 0)) + 0;
+            var miliseconds = Math.floor(Math.random() * (1000 - 0)) + 0;
 
-            var fecha_reproduccion = fecha + " " + hours + ":" + minutes + ":" + seconds;
+            var fecha_reproduccion = fecha + " " + hours + ":" + minutes + ":" + seconds + "." + miliseconds;
 
             console.log("Array size" + tempArray.length);
             pool.query(
                 `INSERT INTO reproducciones(codigo_cancion, codigo_artista, codigo_album, fecha_reproduccion, id)
                 VALUES($1, $2, $3, $4, $5)`,
-                [tempArray[0], tempArray[1], tempArray[2], fecha_reproduccion, req.user.id],
+                [tempArray[0], tempArray[1], tempArray[2], fecha_reproduccion, Math.floor(Math.random() * (40 - 0)) + 0],
                 (err, result) => {
                     if(err) {
                         throw err;

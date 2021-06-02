@@ -12,6 +12,8 @@
     "express-flash": "^0.0.2",
     "express-session": "^1.17.1",
     "inherits": "^2.0.4",
+    "mongodb": "^3.6.9",
+    "mongoose": "^5.12.12",
     "morgan": "^1.10.0",
     "packet-reader": "^1.0.0",
     "passport": "^0.4.1",
