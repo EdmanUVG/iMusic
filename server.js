@@ -61,11 +61,11 @@ app.get("/", (req, res) => {
 // ESTE ES MONGO DB
 app.get('/users/recomendaciones', function(req, res, next) {
 
-    Blog.find({}).then((blogs) => {
-        res.render(blogs);
-    }).catch((error) => {
-        res.status(500).send(error); 
-    })
+    // Blog.find({}).then((blogs) => {
+    //     res.render(blogs);
+    // }).catch((error) => {
+    //     res.status(500).send(error); 
+    // })
 
     try {
         pool.connect(async (error, client, release) => {
